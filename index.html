@@ -6,6 +6,8 @@
     
     <title>METLA | Студия Премиальной Разработки</title>
     <meta name="description" content="Разработка Enterprise IT-решений: Web-приложения, сайты под ключ, умные Telegram-боты и AI-агенты.">
+    <meta property="og:title" content="METLA | Цифровой спецназ для бизнеса">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80">
     <meta name="theme-color" content="#1d1d1f">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -46,7 +48,7 @@
         a { text-decoration: none; color: inherit; }
 
         /* ШАПКА */
-        header { padding: 15px 0; position: sticky; top: 0; z-index: 100; background: rgba(245, 245, 247, 0.85); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        header { padding: 15px 0; position: sticky; top: 0; z-index: 100; background: rgba(245, 245, 247, 0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
         .logo-3d { display: flex; align-items: center; gap: 10px; font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #1d1d1f; text-transform: uppercase; text-shadow: 1px 1px 0px #fff, 2px 2px 0px #e0e0e0, 3px 3px 0px #d0d0d0, 4px 4px 10px rgba(0,0,0,0.15); transition: var(--transition-apple); }
@@ -67,6 +69,9 @@
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: var(--accent); transition: 0.3s; }
         .nav-links a:hover { color: var(--text-main); }
         .nav-links a:hover::after { width: 100%; }
+        
+        /* ЖЕЛЕЗОБЕТОННОЕ СКРЫТИЕ КРЕСТИКА НА ДЕСКТОПЕ */
+        .close-menu-btn { display: none !important; }
         
         .magnetic-btn { display: inline-block; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s; will-change: transform; }
         .btn-apple { background: var(--text-main); color: #fff; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -111,13 +116,9 @@
         .span-12 { grid-column: span 12; display: flex; align-items: center; gap: 40px; }
         .span-12 .card-content-wrap { max-width: 50%; flex: 1; }
         
-        /* НОВАЯ ВЕКТОРНАЯ АБСТРАКЦИЯ (НЕ БЛОКИРУЕТСЯ) */
         .abstract-art { position: absolute; right: -20px; bottom: -20px; width: 280px; height: 280px; z-index: 1; transition: var(--transition-apple); border-radius: 20px; box-shadow: var(--shadow-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .apple-card:hover .abstract-art { transform: scale(1.05) rotate(-2deg); }
-        
-        /* Арт для WEB */
         .art-web { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); }
-        /* Арт для TMA (Dashboard) */
         .art-dashboard { position: relative; right: 0; bottom: 0; flex: 1; height: 280px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: var(--shadow-soft); }
 
         /* ТАРИФЫ */
@@ -252,11 +253,10 @@
 
         #gameCanvas { background: #000; border-radius: 16px; width: 100%; height: 400px; border: 1px solid #333; }
 
-        /* АДАПТИВ (МЕДИА-ЗАПРОСЫ) */
+        /* АДАПТИВ (МЕДИА-ЗАПРОСЫ) И ИСПРАВЛЕНИЕ МЕНЮ */
         @media (max-width: 992px) {
             .span-8, .span-4, .span-6 { grid-column: span 12; }
             .card-content-wrap { max-width: 100%; }
-            .card-image-wrapper { position: relative; right: 0; bottom: 0; width: 100%; height: 200px; margin-top: 20px; }
             .abstract-art { position: relative; right: 0; bottom: 0; width: 100%; height: 200px; margin-top: 20px; }
             .demo-grid, .contact-box, .security-grid, .pricing-grid { grid-template-columns: 1fr; }
             .contact-box { padding: 40px 20px; }
@@ -278,7 +278,9 @@
             }
             .nav-links.active { right: 0; }
             .nav-links a { font-size: 20px; width: 100%; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; color: var(--text-main); }
-            .close-menu-btn { display: block; position: absolute; top: 20px; right: 25px; font-size: 40px; background: none; border: none; color: var(--text-main); cursor: pointer; z-index: 1002; }
+            
+            /* ВОЗВРАЩАЕМ КРЕСТИК НА МОБИЛКАХ С ВЫСШИМ ПРИОРИТЕТОМ */
+            .close-menu-btn { display: block !important; position: absolute; top: 20px; right: 25px; font-size: 40px; background: none; border: none; color: var(--text-main); cursor: pointer; z-index: 1002; }
 
             .hero h1 { font-size: 40px; }
             .legal-bottom { flex-direction: column; gap: 10px; text-align: center; }
@@ -332,12 +334,10 @@
             
             <div class="bento-grid">
                 <div class="apple-card span-8">
-                    <!-- КОНТЕЙНЕР ЗАЩИТЫ ОТ НАЛОЖЕНИЯ -->
                     <div class="card-content-wrap">
                         <div class="card-title">Веб-разработка & SPA</div>
                         <div class="card-text">Проектируем премиальные сайты. От лендингов с высокой конверсией до сложных Single Page Applications. Безупречный UI/UX, оптимизация под SEO и 100 баллов в Google PageSpeed.</div>
                     </div>
-                    <!-- НОВАЯ АБСТРАКЦИЯ ВМЕСТО КАРТИНКИ (Анти-AdBlock) -->
                     <div class="abstract-art art-web">
                         <svg viewBox="0 0 100 100" width="70%" height="70%" opacity="0.9">
                            <rect x="10" y="10" width="80" height="12" rx="3" fill="#cbd5e1"/>
@@ -359,7 +359,6 @@
                         <div class="card-title">Telegram WebApps (TMA)</div>
                         <div class="card-text">Стираем грань между сайтом и мессенджером. Разрабатываем полноценные интернет-магазины, корпоративные дашборды и CRM-системы, которые открываются прямо внутри Telegram в один клик.</div>
                     </div>
-                    <!-- НОВАЯ АБСТРАКЦИЯ ВМЕСТО КАРТИНКИ -->
                     <div class="abstract-art art-dashboard">
                         <svg viewBox="0 0 100 100" width="70%" height="70%">
                            <circle cx="50" cy="50" r="35" fill="none" stroke="#38bdf8" stroke-width="6" stroke-dasharray="140 40" transform="rotate(-45 50 50)"/>
@@ -391,7 +390,6 @@
             </div>
             
             <div class="pricing-grid">
-                <!-- Пакет 1: БОТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Telegram-Боты</h3>
@@ -413,7 +411,6 @@
                     <a href="#contact" class="btn-pricing btn-pricing-outline">Выбрать тариф</a>
                 </div>
 
-                <!-- Пакет 2: WEB-APP (АКЦЕНТ) -->
                 <div class="pricing-card featured">
                     <div class="badge-popular">Топ выбор</div>
                     <div class="pricing-header">
@@ -436,7 +433,6 @@
                     <a href="#contact" class="btn-pricing btn-pricing-solid">Обсудить систему</a>
                 </div>
 
-                <!-- Пакет 3: САЙТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Web & Сайты</h3>
@@ -597,10 +593,6 @@
         </div>
     </footer>
 
-    <!-- ======================================================= -->
-    <!-- МОДАЛЬНЫЕ ОКНА ДЕМОНСТРАЦИЙ                             -->
-    <!-- ======================================================= -->
-
     <div id="storeModal" class="modal-overlay">
         <div class="modal-apple" style="background: transparent; box-shadow: none;">
             <button class="modal-close" style="background:#fff; right: 0; top: 0;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -707,9 +699,7 @@
     </div>
 
     <script>
-        // ==========================================
-        // МАГНИТНЫЕ КНОПКИ (GOD LEVEL UX)
-        // ==========================================
+        // МАГНИТНЫЕ КНОПКИ
         document.querySelectorAll('.magnetic-btn').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
@@ -722,9 +712,7 @@
             });
         });
 
-        // ==========================================
-        // ИНТЕРАКТИВНЫЕ ТАРИФЫ (Переключение цен)
-        // ==========================================
+        // ИНТЕРАКТИВНЫЕ ТАРИФЫ
         function switchPricing(tabElement, category, newPrice, newDesc, featuresActive, featuresDisabled = []) {
             const tabs = tabElement.parentElement.querySelectorAll('.p-tab');
             tabs.forEach(t => t.classList.remove('active'));
@@ -744,9 +732,7 @@
             ul.innerHTML = htmlContent;
         }
 
-        // ==========================================
-        // ЛОГИКА МЕНЮ, ПАРАЛЛАКС И ЛОГОТИП
-        // ==========================================
+        // ЛОГИКА МЕНЮ
         const openMenuBtn = document.getElementById('openMenuBtn');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const navPanel = document.getElementById('navPanel');
@@ -758,6 +744,7 @@
             navLinksItems.forEach(link => link.addEventListener('click', () => navPanel.classList.remove('active')));
         }
 
+        // ПАРАЛЛАКС И ЛОГОТИП
         document.getElementById('flyBroom').addEventListener('click', function() {
             if (!this.classList.contains('flying-broom')) {
                 this.classList.add('flying-broom');
@@ -791,9 +778,7 @@
             }
         });
 
-        // ==========================================
         // МОДАЛЬНЫЕ ОКНА И ДЕМО-ЛОГИКА
-        // ==========================================
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = 'flex';
@@ -877,9 +862,7 @@
             }, 1000);
         }
 
-        // ==========================================
-        // БОЕВАЯ ФОРМА С ИНТЕГРАЦИЕЙ GOOGLE GAS
-        // ==========================================
+        // БОЕВАЯ ФОРМА
         function sanitizeInput(str) {
             return str.replace(/[<>&"']/g, function(m) {
                 return {'<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;'}[m];
@@ -920,9 +903,7 @@
             .finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
         });
 
-        // ==========================================
         // ИГРА GALAXY
-        // ==========================================
         const canvas = document.getElementById('gameCanvas'); 
         const ctx = canvas.getContext('2d');
         let gameLoopId; let frames = 0; let score = 0; let isGameOver = false;
