@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>METLA | Студия Разработки</title>
-    <meta name="description" content="Разработка премиальных IT-решений: Web-приложения, сайты и интеллектуальные Telegram-боты.">
+    <title>METLA | Студия Премиальной Разработки</title>
+    <meta name="description" content="Разработка Enterprise IT-решений: высоконагруженные Web-приложения, интеллектуальные Telegram-боты, AI-агенты.">
+    <meta property="og:title" content="METLA | Цифровой спецназ для бизнеса">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80">
+    <meta name="theme-color" content="#1d1d1f">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,38 +22,26 @@
             --text-secondary: #86868b;
             --accent: #e11d48; 
             --accent-hover: #be123c;
-            --term-green: #32d74b; /* Fallout Green */
+            --term-green: #32d74b;
             --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
             --shadow-volumetric: 0 20px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1);
+            --shadow-glow: 0 0 30px rgba(225, 29, 72, 0.2);
             --radius-large: 32px;
             --transition-apple: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 
-            /* ВОЗВРАЩЕННЫЙ ПАРАЛЛАКС ФОН (Оптимизирован для видимости) */
-            --bg-pattern-front: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' opacity='0.1'%3E%3Ctext x='30' y='60' font-family='monospace' font-size='22' fill='%231d1d1f'%3E%3Ccode/%3E%3C/text%3E%3Ctext x='180' y='120' font-family='monospace' font-size='28' fill='%231d1d1f'%3E%7B %7D%3C/text%3E%3Ctext x='50' y='200' font-family='monospace' font-size='16' fill='%23e11d48'%3Eimport metla%3C/text%3E%3Ctext x='150' y='240' font-family='monospace' font-size='14' fill='%2386868b'%3Eprint('clean')%3C/text%3E%3Ctext x='240' y='50' font-family='monospace' font-size='24' fill='%231d1d1f'%3E=%3E%3C/text%3E%3Ctext x='220' y='210' font-size='40'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='140' font-size='20'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='120' y='170' font-size='16'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='10' y='270' font-size='20' transform='rotate(15 10 270)'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='260' y='280' font-size='18'%3E%F0%9F%90%9B%3C/text%3E%3C/svg%3E");
-            --bg-pattern-back: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' opacity='0.08'%3E%3Ctext x='10' y='20' font-family='monospace' font-size='10' fill='%2386868b'%3E#%3C/text%3E%3Ctext x='50' y='40' font-family='monospace' font-size='12' fill='%23cbd5e1'%3E()%3C/text%3E%3Ctext x='90' y='15' font-family='monospace' font-size='9' fill='%23cbd5e1'%3E.%3C/text%3E%3Ctext x='100' y='60' font-family='monospace' font-size='11' fill='%2386868b'%3E[]%3C/text%3E%3Ctext x='20' y='80' font-size='10'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='100' font-family='monospace' font-size='12' fill='%23e11d48'%3E&lt;&gt;%3C/text%3E%3Ctext x='110' y='110' font-family='monospace' font-size='8' fill='%23cbd5e1'%3E*%3C/text%3E%3C/svg%3E");
+            /* ФОН МЕТЛА + КОД (ПАРАЛЛАКС) */
+            --bg-pattern-front: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' opacity='0.08'%3E%3Ctext x='30' y='60' font-family='monospace' font-size='22' fill='%231d1d1f'%3E%3Ccode/%3E%3C/text%3E%3Ctext x='180' y='120' font-family='monospace' font-size='28' fill='%231d1d1f'%3E%7B %7D%3C/text%3E%3Ctext x='50' y='200' font-family='monospace' font-size='16' fill='%23e11d48'%3Eimport metla%3C/text%3E%3Ctext x='150' y='240' font-family='monospace' font-size='14' fill='%2386868b'%3Eprint('clean')%3C/text%3E%3Ctext x='240' y='50' font-family='monospace' font-size='24' fill='%231d1d1f'%3E=%3E%3C/text%3E%3Ctext x='220' y='210' font-size='40'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='140' font-size='20'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='120' y='170' font-size='16'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='10' y='270' font-size='20' transform='rotate(15 10 270)'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='260' y='280' font-size='18'%3E%F0%9F%90%9B%3C/text%3E%3C/svg%3E");
+            --bg-pattern-back: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' opacity='0.05'%3E%3Ctext x='10' y='20' font-family='monospace' font-size='10' fill='%2386868b'%3E#%3C/text%3E%3Ctext x='50' y='40' font-family='monospace' font-size='12' fill='%23cbd5e1'%3E()%3C/text%3E%3Ctext x='90' y='15' font-family='monospace' font-size='9' fill='%23cbd5e1'%3E.%3C/text%3E%3Ctext x='100' y='60' font-family='monospace' font-size='11' fill='%2386868b'%3E[]%3C/text%3E%3Ctext x='20' y='80' font-size='10'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='100' font-family='monospace' font-size='12' fill='%23e11d48'%3E&lt;&gt;%3C/text%3E%3Ctext x='110' y='110' font-family='monospace' font-size='8' fill='%23cbd5e1'%3E*%3C/text%3E%3C/svg%3E");
         }
 
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background-color: transparent; 
-            color: var(--text-main); 
-            line-height: 1.4; 
-            overflow-x: hidden; 
-        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: transparent; color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
 
         /* ПАРАЛЛАКС ОБОЛОЧКА */
-        .parallax-wrapper { 
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
-            z-index: -1; overflow: hidden; pointer-events: none; 
-            background-color: var(--bg-page); 
-        }
-        .parallax-layer { 
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
-            background-repeat: repeat; will-change: transform; 
-        }
+        .parallax-wrapper { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; overflow: hidden; pointer-events: none; background-color: var(--bg-page); }
+        .parallax-layer { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-repeat: repeat; will-change: transform; }
         .layer-back { background-image: var(--bg-pattern-back); }
         .layer-front { background-image: var(--bg-pattern-front); }
 
@@ -58,80 +49,54 @@
         section { padding: 120px 0; }
         a { text-decoration: none; color: inherit; }
 
-        /* ========================================= */
-        /* ШАПКА И ЖИВОЙ ЛОГОТИП                     */
-        /* ========================================= */
-        header { 
-            padding: 15px 0; position: sticky; top: 0; z-index: 100; 
-            background: rgba(245, 245, 247, 0.8); 
-            backdrop-filter: blur(20px); 
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
+        /* ШАПКА И ЖИВОЙ ЛОГОТИП */
+        header { padding: 15px 0; position: sticky; top: 0; z-index: 100; background: rgba(245, 245, 247, 0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
-        /* ИНТЕРАКТИВНЫЙ ЛОГОТИП */
-        .logo-3d {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 34px; font-weight: 900; letter-spacing: -1px;
-            color: #1d1d1f; text-transform: uppercase;
-            text-shadow: 1px 1px 0px #fff, 2px 2px 0px #e0e0e0, 3px 3px 0px #d0d0d0, 4px 4px 10px rgba(0,0,0,0.15);
-            transition: var(--transition-apple);
-        }
-        
+        .logo-3d { display: flex; align-items: center; gap: 10px; font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #1d1d1f; text-transform: uppercase; text-shadow: 1px 1px 0px #fff, 2px 2px 0px #e0e0e0, 3px 3px 0px #d0d0d0, 4px 4px 10px rgba(0,0,0,0.15); transition: var(--transition-apple); }
         #flyBroom { color: var(--accent); text-shadow: 2px 2px 5px rgba(225, 29, 72, 0.3); cursor: pointer; display: inline-block; transition: 0.3s; }
         #flyBroom:hover { transform: rotate(-15deg) scale(1.1); }
-        
         #interactiveLogoText { display: inline-block; cursor: pointer; user-select: none; }
         .letter { display: inline-block; transition: transform 0.3s ease; }
         
         /* Анимации логотипа */
         .shake-anim { animation: shakeLogo 0.5s ease-in-out; }
         @keyframes shakeLogo { 0%, 100% { transform: translateX(0) rotate(0); } 20%, 60% { transform: translateX(-4px) rotate(-4deg); } 40%, 80% { transform: translateX(4px) rotate(4deg); } }
-        
         .fall-anim { animation: dropLetter 1.5s forwards ease-in; }
         @keyframes dropLetter { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; pointer-events: none; } }
-        
         .flying-broom { animation: flySweep 1.5s ease-in-out forwards; }
         @keyframes flySweep { 0% { transform: translateX(0) rotate(-15deg); } 45% { transform: translateX(100vw) rotate(25deg); opacity: 1; } 49%, 51% { opacity: 0; } 55% { transform: translateX(-100vw) rotate(-25deg); opacity: 1; } 100% { transform: translateX(0) rotate(0deg); } }
 
-        .nav-links { display: flex; gap: 30px; font-weight: 500; font-size: 14px; }
-        .nav-links a { transition: 0.3s; opacity: 0.8; }
-        .nav-links a:hover { opacity: 1; color: var(--accent); }
+        .nav-links { display: flex; gap: 30px; font-weight: 600; font-size: 14px; }
+        .nav-links a { transition: 0.3s; color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(0,0,0,0.1); }
         
-        .btn-apple { 
-            background: var(--text-main); color: #fff; padding: 12px 24px; 
-            border-radius: 100px; font-size: 14px; font-weight: 600; 
-            border: none; cursor: pointer; transition: var(--transition-apple); 
-        }
-        .btn-apple:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-apple { background: var(--text-main); color: #fff; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: var(--transition-apple); }
+        .btn-apple:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.15); background: #000; }
         .mobile-menu-btn { display: none; font-size: 24px; cursor: pointer; }
 
-        /* ========================================= */
-        /* ГЛАВНЫЙ ЭКРАН                             */
-        /* ========================================= */
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero { text-align: center; padding: 160px 0 100px; will-change: opacity, transform, filter; }
-        .hero h1 { font-size: clamp(48px, 8vw, 84px); font-weight: 800; letter-spacing: -3px; line-height: 1.05; margin-bottom: 20px; }
-        .hero p { font-size: clamp(18px, 3vw, 24px); color: var(--text-secondary); font-weight: 500; max-width: 700px; margin: 0 auto 50px; }
-        .btn-large { background: var(--accent); color: #fff; padding: 18px 40px; border-radius: 100px; font-size: 18px; font-weight: 600; display: inline-block; transition: var(--transition-apple); box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3); }
+        .hero h1 { font-size: clamp(48px, 8vw, 84px); font-weight: 800; letter-spacing: -3px; line-height: 1.05; margin-bottom: 20px; background: linear-gradient(135deg, #1d1d1f 0%, #434345 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: clamp(18px, 3vw, 22px); color: var(--text-secondary); font-weight: 500; max-width: 700px; margin: 0 auto 50px; line-height: 1.6; }
+        .btn-large { background: var(--accent); color: #fff; padding: 18px 45px; border-radius: 100px; font-size: 18px; font-weight: 600; display: inline-block; transition: var(--transition-apple); box-shadow: var(--shadow-glow); }
         .btn-large:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 15px 40px rgba(225, 29, 72, 0.4); }
 
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; }
-        .section-header p { font-size: 20px; color: var(--text-secondary); margin-top: 10px; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-size: clamp(36px, 5vw, 54px); font-weight: 800; letter-spacing: -2px; }
+        .section-header p { font-size: 20px; color: var(--text-secondary); margin-top: 10px; font-weight: 500; }
 
-        /* ========================================= */
-        /* УСЛУГИ И КАРТОЧКИ                         */
-        /* ========================================= */
+        /* УСЛУГИ (BENTO) */
         .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-        .apple-card { 
-            background: var(--bg-card); backdrop-filter: blur(20px);
-            border-radius: var(--radius-large); padding: 40px; 
-            box-shadow: var(--shadow-volumetric); border: 1px solid rgba(255,255,255,0.6);
-            transition: var(--transition-apple); position: relative; overflow: hidden;
-        }
-        .apple-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-        .card-title { font-size: 28px; font-weight: 700; margin-bottom: 15px; position: relative; z-index: 2; }
-        .card-text { font-size: 17px; color: var(--text-secondary); line-height: 1.5; position: relative; z-index: 2; }
+        .apple-card { background: var(--bg-card); backdrop-filter: blur(20px); border-radius: var(--radius-large); padding: 40px; box-shadow: var(--shadow-volumetric); border: 1px solid rgba(255,255,255,0.6); transition: var(--transition-apple); position: relative; overflow: hidden; }
+        .apple-card:hover { transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+        
+        /* Градиентная подсветка карточек при наведении */
+        .apple-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, rgba(225,29,72,0.05) 0%, transparent 70%); opacity: 0; transition: 0.5s; z-index: 0; }
+        .apple-card:hover::before { opacity: 1; }
+
+        .card-title { font-size: 30px; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; letter-spacing: -1px; }
+        .card-text { font-size: 17px; color: var(--text-secondary); line-height: 1.6; position: relative; z-index: 2; }
         
         .span-8 { grid-column: span 8; } .span-4 { grid-column: span 4; } .span-6 { grid-column: span 6; }
         .span-12 { grid-column: span 12; display: flex; align-items: center; gap: 40px; }
@@ -140,92 +105,136 @@
         .apple-card:hover .card-image-wrapper { transform: scale(1.05) rotate(-2deg); }
         .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-soft); }
 
-        .tech-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
-        .tech-pill { background: #fff; padding: 15px 30px; border-radius: 100px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #eee; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .tech-pill i { font-size: 20px; color: var(--accent); }
-        .tech-pill:hover { transform: translateY(-5px); border-color: var(--accent); }
+        /* БЛОК БЕЗОПАСНОСТИ (ENTERPRISE SECURITY) */
+        .security-section { background: #111113; color: #fff; padding: 100px 0; border-radius: 40px; margin: 60px 0; position: relative; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.3); }
+        .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; z-index: 2; position: relative; }
+        .sec-title { font-size: 42px; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; color: #fff; }
+        .sec-title span { color: var(--accent); }
+        .sec-list { list-style: none; margin-top: 30px; }
+        .sec-list li { display: flex; align-items: center; gap: 15px; font-size: 18px; margin-bottom: 20px; color: #a1a1a6; }
+        .sec-list li i { color: var(--term-green); font-size: 24px; }
+        .cyber-shield { width: 100%; height: 300px; background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath fill="none" stroke="%2332d74b" stroke-width="2" d="M50 5 L90 25 L90 60 C90 80 50 95 50 95 C50 95 10 80 10 60 L10 25 Z" opacity="0.2"/%3E%3Cpath fill="none" stroke="%23e11d48" stroke-width="1" d="M50 15 L80 30 L80 55 C80 70 50 85 50 85 C50 85 20 70 20 55 L20 30 Z" opacity="0.5"/%3E%3C/svg%3E') no-repeat center; background-size: contain; animation: pulseShield 4s infinite alternate; }
+        @keyframes pulseShield { from { transform: scale(1); filter: drop-shadow(0 0 10px rgba(50,215,75,0.2)); } to { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(50,215,75,0.6)); } }
 
-        /* ========================================= */
-        /* ДЕМО СЕТКА И AES-256                      */
-        /* ========================================= */
+        /* ДЕМО КАРТОЧКИ С НОВЫМИ ИНТЕРАКТИВАМИ */
         .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .demo-card { background: #1d1d1f; color: #fff; border-radius: var(--radius-large); padding: 50px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: var(--transition-apple); }
-        .demo-card:hover { transform: translateY(-10px); }
-        .demo-card h3 { font-size: 32px; font-weight: 700; margin-bottom: 15px; }
-        .demo-card p { font-size: 18px; color: #a1a1a6; margin-bottom: 25px; max-width: 80%; }
+        .demo-card { background: #1d1d1f; color: #fff; border-radius: var(--radius-large); padding: 50px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: var(--transition-apple); border: 1px solid #333; }
+        .demo-card:hover { transform: translateY(-10px); border-color: #555; }
+        .demo-card h3 { font-size: 32px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+        .demo-card p { font-size: 17px; color: #a1a1a6; margin-bottom: 30px; max-width: 80%; line-height: 1.6; }
         
-        /* Шильдики */
         .tags-container { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .demo-badge { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
-        .demo-badge.aes { background: rgba(50, 215, 75, 0.2); color: #32d74b; border: 1px solid #32d74b; }
+        .demo-badge { background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .demo-badge.aes { background: rgba(50, 215, 75, 0.15); color: var(--term-green); border: 1px solid rgba(50, 215, 75, 0.3); }
+        .demo-badge.ai { background: rgba(138, 43, 226, 0.15); color: #c882ff; border: 1px solid rgba(138, 43, 226, 0.3); }
         
-        .demo-action { color: #fff; font-weight: 600; cursor: pointer; border-bottom: 1px solid #fff; padding-bottom: 2px; transition: 0.3s; display: inline-block; }
-        .demo-action:hover { color: var(--accent); border-color: var(--accent); }
-        .demo-bg { position: absolute; right: -50px; bottom: -50px; opacity: 0.4; transition: 0.5s; }
-        .demo-card:hover .demo-bg { opacity: 0.8; transform: scale(1.1); }
+        .demo-action { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; cursor: pointer; padding-bottom: 5px; transition: 0.3s; font-size: 16px; }
+        .demo-action i { transition: 0.3s; }
+        .demo-card:hover .demo-action { color: var(--accent); }
+        .demo-card:hover .demo-action i { transform: translateX(5px); }
+        
+        .demo-bg { position: absolute; right: -30px; bottom: -30px; opacity: 0.05; transition: 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .demo-card:hover .demo-bg { opacity: 0.15; transform: scale(1.1) rotate(-5deg); }
 
-        /* ========================================= */
-        /* КОНТАКТНАЯ ФОРМА                          */
-        /* ========================================= */
-        .contact-box { background: #fff; border-radius: var(--radius-large); padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; box-shadow: var(--shadow-volumetric); border: 1px solid #fff; }
-        .contact-info h2 { font-size: 42px; font-weight: 800; margin-bottom: 20px; }
+        /* БАЗА ЗНАНИЙ (FAQ ACCORDION) */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--bg-card); backdrop-filter: blur(20px); border-radius: 20px; margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { box-shadow: var(--shadow-soft); }
+        .faq-summary { padding: 25px 30px; font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
+        .faq-summary::-webkit-details-marker { display: none; }
+        .faq-summary::after { content: '+'; font-size: 24px; font-weight: 400; color: var(--accent); transition: transform 0.3s; }
+        details[open] .faq-summary::after { transform: rotate(45deg); }
+        .faq-content { padding: 0 30px 30px; color: var(--text-secondary); font-size: 16px; line-height: 1.6; }
+
+        /* КОНТАКТНАЯ ФОРМА */
+        .contact-box { background: var(--bg-card); backdrop-filter: blur(30px); border-radius: 40px; padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; box-shadow: var(--shadow-volumetric); border: 1px solid rgba(255,255,255,0.8); }
+        .contact-info h2 { font-size: clamp(36px, 5vw, 48px); font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
         .contact-info p { font-size: 18px; color: var(--text-secondary); line-height: 1.6; }
-        .apple-input { width: 100%; padding: 20px; border: 1px solid #e5e5ea; border-radius: 16px; font-family: inherit; font-size: 17px; background: #fbfbfd; transition: 0.3s; margin-bottom: 15px; }
-        .apple-input:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1); }
+        .apple-input { width: 100%; padding: 22px; border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; font-family: inherit; font-size: 17px; background: rgba(255,255,255,0.9); transition: var(--transition-apple); margin-bottom: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
+        .apple-input:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1), inset 0 2px 5px rgba(0,0,0,0); }
 
-        footer { background: #f5f5f7; padding: 60px 0 40px; border-top: 1px solid #d2d2d7; margin-top: 100px; }
-        .footer-content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-        .footer-links a { display: block; color: var(--text-secondary); margin-bottom: 10px; transition: 0.3s; }
-        .legal-bottom { text-align: center; color: #86868b; font-size: 12px; padding-top: 20px; border-top: 1px solid #d2d2d7; display: flex; justify-content: space-between; }
-        .legal-link { cursor: pointer; text-decoration: underline; }
+        footer { background: #111113; color: #fff; padding: 80px 0 40px; border-radius: 40px 40px 0 0; margin-top: 100px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 60px; }
+        .footer-logo { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1px; }
+        .footer-links a { display: block; color: #86868b; margin-bottom: 15px; transition: 0.3s; font-size: 15px; font-weight: 500; }
+        .footer-links a:hover { color: #fff; }
+        .legal-bottom { text-align: center; color: #555; font-size: 13px; padding-top: 30px; border-top: 1px solid #333; display: flex; justify-content: space-between; }
+        .legal-link { cursor: pointer; text-decoration: none; color: #86868b; transition: 0.3s; }
+        .legal-link:hover { color: var(--accent); }
 
         /* ========================================= */
-        /* МОДАЛЬНЫЕ ОКНА                            */
+        /* МОДАЛЬНЫЕ ОКНА И НОВЫЕ ДЕМО               */
         /* ========================================= */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.4s; }
         .modal-overlay.active { opacity: 1; }
-        .modal-apple { background: #fff; border-radius: 24px; padding: 40px; width: 90%; max-width: 600px; position: relative; transform: translateY(20px); transition: 0.4s; }
-        .modal-overlay.active .modal-apple { transform: translateY(0); }
-        .modal-close { position: absolute; top: 15px; right: 15px; width: 35px; height: 35px; background: #f5f5f7; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: #86868b; border: none; transition: 0.3s; z-index: 10; }
-        
-        #gameCanvas { background: #000; border-radius: 12px; width: 100%; height: 400px; border: 1px solid #333; }
+        .modal-apple { background: #fff; border-radius: 32px; padding: 40px; width: 90%; max-width: 600px; position: relative; transform: translateY(30px) scale(0.95); transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 50px 100px rgba(0,0,0,0.5); }
+        .modal-overlay.active .modal-apple { transform: translateY(0) scale(1); }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(0,0,0,0.05); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: #1d1d1f; border: none; transition: 0.3s; z-index: 10; font-size: 18px; }
+        .modal-close:hover { background: rgba(0,0,0,0.1); transform: rotate(90deg); }
 
-        /* ========================================= */
-        /* ТЕРМИНАЛ FALLOUT STYLE                    */
-        /* ========================================= */
-        .fallout-bg { background: #0a0a0a !important; border: 2px solid var(--term-green); box-shadow: 0 0 20px rgba(50,215,75,0.1); }
+        /* Демо: Магазин WebApp (Имитация смартфона) */
+        .phone-mockup { width: 320px; height: 550px; border: 12px solid #111; border-radius: 40px; margin: 0 auto; background: #f5f5f7; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
+        .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #111; border-radius: 0 0 15px 15px; z-index: 10; }
+        .shop-header { background: #fff; padding: 40px 20px 15px; font-weight: 700; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .shop-items { padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 400px; overflow-y: auto; }
+        .shop-card { background: #fff; border-radius: 12px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s; }
+        .shop-card:hover { transform: scale(1.05); border: 1px solid var(--accent); }
+        .shop-card-img { width: 100%; height: 80px; background: #eee; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .shop-card-btn { background: var(--text-main); color: #fff; border: none; width: 100%; padding: 5px; border-radius: 6px; margin-top: 10px; font-size: 12px; font-weight: 600; }
+
+        /* Демо: Парсер Данных */
+        .parser-bg { background: #0f172a !important; color: #e2e8f0; }
+        .parser-header { font-family: monospace; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; }
+        .parser-console { background: #020617; padding: 15px; border-radius: 8px; height: 150px; font-family: monospace; font-size: 12px; color: #38bdf8; overflow-y: hidden; margin-bottom: 15px; }
+        .parser-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .parser-table th, .parser-table td { border: 1px solid #334155; padding: 8px; text-align: left; }
+        .parser-table th { background: #1e293b; color: #94a3b8; }
+
+        /* Демо: AI Агент */
+        .ai-bg { background: #ffffff !important; }
+        .ai-chat-box { background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; height: 350px; display: flex; flex-direction: column; }
+        .ai-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .ai-msg { padding: 12px 18px; border-radius: 16px; font-size: 15px; max-width: 85%; line-height: 1.5; }
+        .ai-user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai-bot { background: #fff; border: 1px solid #e2e8f0; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .typing-indicator { display: inline-flex; gap: 4px; align-items: center; padding: 5px 0; }
+        .dot { width: 6px; height: 6px; background: #cbd5e1; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; } .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* Терминал Fallout */
+        .fallout-bg { background: #0a0a0a !important; border: 2px solid var(--term-green); box-shadow: 0 0 30px rgba(50,215,75,0.15); }
         .fallout-bg .modal-close { background: var(--term-green); color: #000; }
-        .fallout-bg .modal-close:hover { background: #fff; box-shadow: 0 0 10px var(--term-green); }
-        
+        .fallout-bg .modal-close:hover { background: #fff; }
         .ms-login { display: flex; flex-direction: column; gap: 15px; }
-        .ms-login h3 { color: var(--term-green); font-family: monospace; text-align: center; margin-bottom: 10px; text-shadow: 0 0 5px var(--term-green); }
-        .ms-input { background: #000; border: 1px solid var(--term-green); color: var(--term-green); font-family: monospace; padding: 15px; border-radius: 8px; font-size: 14px; outline: none; transition: 0.3s; }
-        .ms-input:focus { box-shadow: 0 0 10px rgba(50,215,75,0.4); }
-        .ms-input::placeholder { color: rgba(50,215,75,0.5); }
-        .ms-btn { background: var(--term-green); color: #000; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: monospace; transition: 0.3s; text-transform: uppercase; }
+        .ms-login h3 { color: var(--term-green); font-family: monospace; text-align: center; margin-bottom: 10px; }
+        .ms-input { background: #000; border: 1px solid var(--term-green); color: var(--term-green); font-family: monospace; padding: 15px; border-radius: 8px; font-size: 15px; outline: none; transition: 0.3s; }
+        .ms-input:focus { box-shadow: inset 0 0 10px rgba(50,215,75,0.2); }
+        .ms-btn { background: var(--term-green); color: #000; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: monospace; text-transform: uppercase; transition: 0.3s; }
         .ms-btn:hover { background: #fff; box-shadow: 0 0 15px var(--term-green); }
-        
         .ms-chat { display: none; flex-direction: column; height: 350px; }
         .ms-chat-header { border-bottom: 1px dashed var(--term-green); padding-bottom: 10px; font-family: monospace; color: var(--term-green); text-align: center; margin-bottom: 10px; }
-        .ms-messages { flex-grow: 1; padding: 10px 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-family: monospace; color: var(--term-green); scrollbar-width: thin; scrollbar-color: var(--term-green) #000; }
-        .msg { padding: 10px 15px; border-radius: 8px; max-width: 85%; font-size: 14px; border: 1px solid var(--term-green); word-break: break-word; }
+        .ms-messages { flex-grow: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-family: monospace; color: var(--term-green); }
+        .msg { padding: 10px 15px; border-radius: 8px; max-width: 85%; font-size: 14px; border: 1px solid var(--term-green); }
         .msg.sys { background: transparent; align-self: center; color: #1a8c2f; border: none; font-size: 12px; }
         .msg.in { background: rgba(50,215,75,0.1); align-self: flex-start; }
-        .msg.out { background: rgba(50,215,75,0.3); align-self: flex-end; text-align: right; }
-        
+        .msg.out { background: rgba(50,215,75,0.3); align-self: flex-end; }
         .chat-input-area { display: flex; gap: 10px; margin-top: 15px; }
 
-        /* Адаптив */
+        /* Игра */
+        #gameCanvas { background: #000; border-radius: 16px; width: 100%; height: 400px; border: 1px solid #333; }
+
         @media (max-width: 992px) {
             .span-8, .span-4, .span-6 { grid-column: span 12; }
             .span-12 { flex-direction: column; align-items: flex-start; }
             .card-image-wrapper { position: relative; right: 0; bottom: 0; width: 100%; height: 200px; margin-top: 20px; }
-            .demo-grid, .contact-box { grid-template-columns: 1fr; }
+            .demo-grid, .contact-box, .security-grid { grid-template-columns: 1fr; }
             .contact-box { padding: 40px 20px; }
+            .security-section { padding: 60px 20px; }
         }
         @media (max-width: 768px) {
             .nav-links, .btn-apple.desktop-only { display: none; }
-            .mobile-menu-btn { display: block; }
+            .mobile-menu-btn { display: block; font-size: 28px; }
             .hero h1 { font-size: 40px; }
             .legal-bottom { flex-direction: column; gap: 10px; text-align: center; }
             .footer-content { flex-direction: column; gap: 30px; }
@@ -245,16 +254,17 @@
             <div class="header-inner">
                 <!-- ИНТЕРАКТИВНЫЙ ЛОГОТИП -->
                 <div class="logo-3d">
-                    <i class="fa-solid fa-broom" id="flyBroom" title="Кликни для взлета!"></i> 
-                    <div id="interactiveLogoText" title="Урони меня!">
+                    <i class="fa-solid fa-broom" id="flyBroom" title="Взлет!"></i> 
+                    <div id="interactiveLogoText" title="Гравитация!">
                         <span class="letter">M</span><span class="letter">E</span><span class="letter">T</span><span class="letter">L</span><span class="letter">A</span>
                     </div>
                 </div>
                 
                 <nav class="nav-links">
                     <a href="#services">Экспертиза</a>
-                    <a href="#stack">Технологии</a>
+                    <a href="#security">Безопасность</a>
                     <a href="#cases">Решения</a>
+                    <a href="#faq">FAQ</a>
                 </nav>
                 <a href="#contact" class="btn-apple desktop-only">Обсудить проект</a>
                 <i class="fa-solid fa-bars mobile-menu-btn"></i>
@@ -263,9 +273,28 @@
 
         <section class="hero" id="heroSection">
             <h1>Создаем цифровые<br>решения будущего.</h1>
-            <p>От интеллектуальных Telegram-ботов до высоконагруженных Web-приложений. Чистый код, превосходный дизайн, бескомпромиссная надежность.</p>
+            <p>От интеллектуальных Telegram-ботов до высоконагруженных Web-приложений. Чистый код, Enterprise архитектура, бескомпромиссная надежность.</p>
             <div class="hero-btns">
-                <a href="#contact" class="btn-large">Начать проект</a>
+                <a href="#contact" class="btn-large">Инициализировать проект</a>
+            </div>
+        </section>
+
+        <!-- НОВЫЙ БЛОК: БЕЗОПАСНОСТЬ -->
+        <section id="security" style="padding: 0;">
+            <div class="security-section">
+                <div class="security-grid">
+                    <div>
+                        <h2 class="sec-title">Архитектура<br><span>Безопасности</span></h2>
+                        <p style="font-size: 18px; color: #a1a1a6; line-height: 1.6;">Мы не просто пишем код. Мы строим цифровые крепости. Защита ваших данных и данных ваших клиентов закладывается на этапе проектирования (Security by Design).</p>
+                        <ul class="sec-list">
+                            <li><i class="fa-solid fa-shield-halved"></i> Защита от OWASP Top 10 уязвимостей</li>
+                            <li><i class="fa-solid fa-server"></i> Изолированные базы данных и Anti-DDoS</li>
+                            <li><i class="fa-solid fa-user-secret"></i> Строгий NDA до первого созвона</li>
+                            <li><i class="fa-solid fa-key"></i> Хранение токенов в защищенных Vaults</li>
+                        </ul>
+                    </div>
+                    <div class="cyber-shield"></div>
+                </div>
             </div>
         </section>
 
@@ -277,105 +306,120 @@
             
             <div class="bento-grid">
                 <div class="apple-card span-8">
-                    <div class="card-title">Веб-разработка & Сайты</div>
-                    <div class="card-text">Проектируем и разрабатываем современные сайты: от конверсионных Landing Page до полноценных Single Page Applications (SPA). Адаптивный дизайн, микроинтеракции и мгновенная загрузка.</div>
+                    <div class="card-title">Веб-разработка & SPA</div>
+                    <div class="card-text">Проектируем премиальные сайты. От лендингов с высокой конверсией до сложных Single Page Applications (React/Vue). Безупречный UI/UX, оптимизация под SEO и 100 баллов в Google PageSpeed.</div>
                     <div class="card-image-wrapper" style="right: 20px;">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Web Development">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Web">
                     </div>
                 </div>
 
-                <div class="apple-card span-4" style="background: #1d1d1f; color: #fff;">
+                <div class="apple-card span-4" style="background: #1d1d1f; color: #fff; border-color: #333;">
                     <div class="card-title" style="color: #fff;">Telegram-Боты</div>
-                    <div class="card-text" style="color: #a1a1a6;">Сложные архитектуры на Python. Интеграция с БД, платежными шлюзами и CRM.</div>
-                    <i class="fa-solid fa-robot" style="font-size: 80px; color: var(--accent); position: absolute; right: -10px; bottom: -10px; opacity: 0.5;"></i>
+                    <div class="card-text" style="color: #a1a1a6;">Сложные архитектуры на Python (Aiogram 3). Интеграция с PostgreSQL, платежами (Stripe/Robokassa) и внешними API.</div>
+                    <i class="fa-solid fa-robot" style="font-size: 80px; color: var(--accent); position: absolute; right: -10px; bottom: -10px; opacity: 0.3;"></i>
                 </div>
 
                 <div class="apple-card span-12">
                     <div style="flex: 1;">
                         <div class="card-title">Telegram WebApps (TMA)</div>
-                        <div class="card-text">Превращаем Telegram в полноценную платформу. Разрабатываем встроенные интернет-магазины, панели управления и интерактивные игры прямо внутри мессенджера.</div>
+                        <div class="card-text">Стираем грань между сайтом и мессенджером. Разрабатываем полноценные интернет-магазины, корпоративные дашборды и CRM-системы, которые открываются прямо внутри Telegram в один клик.</div>
                     </div>
                     <div style="flex: 1; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft);">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" style="width: 100%; display: block;" alt="Data Analytics">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" style="width: 100%; display: block;" alt="Data">
                     </div>
                 </div>
 
                 <div class="apple-card span-6">
-                    <div class="card-title">Парсинг & Автоматизация</div>
-                    <div class="card-text">Пишем надежные скрипты для сбора данных. Имитация действий человека, обход блокировок, формирование Excel/CSV отчетов по расписанию.</div>
+                    <div class="card-title">Data Scraping & Парсеры</div>
+                    <div class="card-text">Извлечение данных любой сложности. Напишем скрипт, который соберет цены конкурентов, спарсит каталоги и выгрузит всё в чистую Excel-таблицу. Обходим Cloudflare и капчи.</div>
                 </div>
 
                 <div class="apple-card span-6">
-                    <div class="card-title">Интеграция ИИ (LLM)</div>
-                    <div class="card-text">Подключаем ChatGPT и Claude к вашим сервисам. Умная поддержка клиентов, генерация контента и анализ текстов на автопилоте.</div>
+                    <div class="card-title">Внедрение AI (Нейросети)</div>
+                    <div class="card-text">Подключаем ChatGPT, Claude или локальные LLM к вашим бизнес-процессам. Создаем умных ассистентов техподдержки, способных понимать контекст и продавать услуги без участия человека.</div>
                 </div>
             </div>
         </section>
 
-        <section id="stack">
-            <div class="section-header">
-                <h2>Технологический Стек</h2>
-                <p>Мы используем передовые и надежные инструменты</p>
-            </div>
-            <div class="tech-container">
-                <div class="tech-pill"><i class="fa-brands fa-python"></i> Python 3+</div>
-                <div class="tech-pill"><i class="fa-brands fa-react" style="color: #61dafb;"></i> React & JS</div>
-                <div class="tech-pill"><i class="fa-solid fa-database" style="color: #336791;"></i> PostgreSQL / SQLite</div>
-                <div class="tech-pill"><i class="fa-brands fa-docker" style="color: #2496ed;"></i> Docker</div>
-                <div class="tech-pill"><i class="fa-solid fa-code-branch"></i> Aiogram 3</div>
-                <div class="tech-pill"><i class="fa-brands fa-html5" style="color: #e34f26;"></i> HTML5 / CSS3</div>
-            </div>
-        </section>
-
+        <!-- НОВЫЕ ДЕМОНСТРАЦИИ -->
         <section id="cases">
             <div class="section-header">
-                <h2>Прототипы & Демо</h2>
-                <p>Оцените качество нашей работы вживую</p>
+                <h2>Визуализация & Демо</h2>
+                <p>Оцените механику решений в реальном времени</p>
             </div>
             <div class="demo-grid">
                 
                 <div class="demo-card">
                     <div class="tags-container">
-                        <span class="demo-badge">Telegram WebApp</span>
+                        <span class="demo-badge">Telegram TMA</span>
                     </div>
-                    <h3>E-Commerce Бот</h3>
-                    <p>Полноценный магазин внутри Telegram. Каталог товаров, корзина, оформление заказа и оплата картой.</p>
-                    <div class="demo-action">Разработка под ключ</div>
-                    <i class="fa-solid fa-bag-shopping demo-bg" style="font-size: 180px; color: rgba(255,255,255,0.05);"></i>
+                    <h3>E-Commerce WebApp</h3>
+                    <p>Демонстрация мобильного интерфейса магазина внутри Telegram. Идеальный UX для быстрых покупок.</p>
+                    <div class="demo-action" onclick="openModal('storeModal')">Открыть магазин <i class="fa-solid fa-arrow-right"></i></div>
+                    <i class="fa-solid fa-mobile-screen demo-bg" style="font-size: 180px;"></i>
                 </div>
 
                 <div class="demo-card" style="background: #101014;">
                     <div class="tags-container">
-                        <span class="demo-badge" style="background: rgba(225, 29, 72, 0.2); color: #fff;">GameDev</span>
+                        <span class="demo-badge ai"><i class="fa-solid fa-brain"></i> AI Agent</span>
                     </div>
-                    <h3>Аркада Galaxy</h3>
-                    <p>Демонстрация возможностей HTML5 Canvas внутри экосистемы Telegram. Плавная физика и коллизии.</p>
-                    <div class="demo-action" onclick="openModal('gameModal')">Запустить демо &rarr;</div>
-                    <i class="fa-solid fa-gamepad demo-bg" style="font-size: 180px; color: rgba(225, 29, 72, 0.1);"></i>
+                    <h3>Умный Ассистент</h3>
+                    <p>Имитация работы нейросети, интегрированной в корпоративный чат для автоматической поддержки клиентов.</p>
+                    <div class="demo-action" onclick="openAiModal()">Запустить AI тест <i class="fa-solid fa-arrow-right"></i></div>
+                    <i class="fa-solid fa-microchip demo-bg" style="font-size: 180px;"></i>
                 </div>
 
                 <div class="demo-card" style="background: #141416;">
                     <div class="tags-container">
-                        <span class="demo-badge">Сфера Услуг</span>
+                        <span class="demo-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">Big Data</span>
                     </div>
-                    <h3>CRM & Бронирование</h3>
-                    <p>Бот-администратор для записи клиентов. Интеграция с Google Календарем и системами учета.</p>
-                    <div class="demo-action">Внедрение от 7 дней</div>
-                    <i class="fa-regular fa-calendar-check demo-bg" style="font-size: 180px; color: rgba(255,255,255,0.05);"></i>
+                    <h3>Парсер Данных</h3>
+                    <p>Демонстрация работы скрипта по автоматическому сбору и структурированию данных с внешних ресурсов.</p>
+                    <div class="demo-action" onclick="openParserModal()">Смотреть процесс <i class="fa-solid fa-arrow-right"></i></div>
+                    <i class="fa-solid fa-database demo-bg" style="font-size: 180px;"></i>
                 </div>
 
-                <!-- ВОЗВРАЩЕННЫЙ AES-256 / TERMINAL -->
                 <div class="demo-card">
                     <div class="tags-container">
                         <span class="demo-badge aes"><i class="fa-solid fa-shield-halved"></i> AES-256</span>
                         <span class="demo-badge aes">E2E Шифрование</span>
                     </div>
-                    <h3>Мессенджер МЕТЛА</h3>
-                    <p>Защищенная корпоративная платформа. Вход по позывному и частоте. Интеграция с внешними БД.</p>
-                    <div class="demo-action" onclick="openTerminalModal()">Запустить терминал &rarr;</div>
-                    <i class="fa-solid fa-terminal demo-bg" style="font-size: 180px; color: rgba(255,255,255,0.05);"></i>
+                    <h3>Терминал METLA</h3>
+                    <p>Защищенная корпоративная консоль. Вход по позывному и частоте. Защита от перехвата пакетов.</p>
+                    <div class="demo-action" onclick="openTerminalModal()">Войти в систему <i class="fa-solid fa-arrow-right"></i></div>
+                    <i class="fa-solid fa-terminal demo-bg" style="font-size: 180px;"></i>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- НОВАЯ БАЗА ЗНАНИЙ (FAQ) -->
+        <section id="faq">
+            <div class="section-header">
+                <h2>База знаний</h2>
+                <p>Прозрачность процессов — залог успешного проекта</p>
+            </div>
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary class="faq-summary">Кому принадлежат права на код после разработки?</summary>
+                    <div class="faq-content">Исключительные права полностью передаются вам после подписания акта приема-передачи. Вы получаете чистый, задокументированный исходный код (исходники) и доступы ко всем серверам. Мы не привязываем клиентов к себе обманными путями.</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-summary">Подписываете ли вы NDA (Соглашение о неразглашении)?</summary>
+                    <div class="faq-content">Да, мы готовы подписать строгий NDA еще до первого созвона и обсуждения деталей вашего проекта. Мы работаем с корпоративными клиентами и понимаем важность коммерческой тайны.</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-summary">Как происходит процесс оплаты?</summary>
+                    <div class="faq-content">Мы работаем по договору с ИП/ООО или как самозанятые. Оплата разбивается на прозрачные этапы (спринты). Вы платите только за видимый и протестированный результат. Возможна оплата криптой для зарубежных проектов.</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-summary">На чем вы пишете? Какой стек технологий?</summary>
+                    <div class="faq-content">Бэкенд и боты разрабатываются на <b>Python 3</b> (фреймворки FastAPI, Aiogram 3). Фронтенд — <b>React.js</b> или нативный Vanilla JS для максимальной скорости. Базы данных — <b>PostgreSQL</b> или Redis для кэширования. Инфраструктура разворачивается в <b>Docker</b>-контейнерах.</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-summary">Предоставляете ли вы поддержку после релиза?</summary>
+                    <div class="faq-content">Да. На каждый разработанный проект мы даем гарантийный период на устранение любых скрытых багов. По желанию клиента мы заключаем договор на ежемесячное SLA-обслуживание (развитие функционала и мониторинг серверов 24/7).</div>
+                </details>
             </div>
         </section>
 
@@ -386,11 +430,11 @@
                     <p>Опишите вашу задачу. Мы проведем аналитику, подберем стек технологий и предложим оптимальную архитектуру проекта.</p>
                 </div>
                 <form id="contactForm">
-                    <input type="text" id="userName" class="apple-input" placeholder="Ваше имя" required>
-                    <input type="text" id="userContact" class="apple-input" placeholder="Telegram / Телефон" required>
+                    <input type="text" id="userName" class="apple-input" placeholder="Ваше имя / Позывной" required>
+                    <input type="text" id="userContact" class="apple-input" placeholder="Telegram username" required>
                     <textarea id="userTask" class="apple-input" rows="4" placeholder="Краткое описание задачи..." required></textarea>
-                    <button type="submit" class="btn-large" style="width: 100%;">Отправить запрос</button>
-                    <p style="font-size: 12px; color: #86868b; text-align: center; margin-top: 15px;">
+                    <button type="submit" class="btn-large" style="width: 100%;">Отправить защищенный запрос</button>
+                    <p style="font-size: 13px; color: #86868b; text-align: center; margin-top: 15px;">
                         Нажимая кнопку, вы соглашаетесь с <span class="legal-link" onclick="openModal('policyModal')">Политикой конфиденциальности</span>
                     </p>
                 </form>
@@ -404,7 +448,7 @@
             <div class="footer-content">
                 <div>
                     <div class="footer-logo"><i class="fa-solid fa-broom" style="color:var(--accent);"></i> METLA</div>
-                    <p style="color: #86868b; margin-top: 10px;">Студия премиальной разработки.</p>
+                    <p style="color: #86868b; margin-top: 10px; max-width: 300px;">Разработка Enterprise IT-решений. Код, который решает задачи бизнеса.</p>
                 </div>
                 <div class="footer-links">
                     <a href="https://t.me/vdvmetla" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram: @vdvmetla</a>
@@ -418,7 +462,69 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО: ТЕРМИНАЛ (FALLOUT РАБОЧИЙ) -->
+    <!-- ======================================================= -->
+    <!-- МОДАЛЬНЫЕ ОКНА ДЕМОНСТРАЦИЙ                             -->
+    <!-- ======================================================= -->
+
+    <!-- 1. МАГАЗИН WEBAPP -->
+    <div id="storeModal" class="modal-overlay">
+        <div class="modal-apple" style="background: transparent; box-shadow: none;">
+            <button class="modal-close" style="background:#fff; right: 0; top: 0;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="shop-header">
+                    <span><i class="fa-solid fa-bars"></i> Меню</span>
+                    <span>METLA STORE</span>
+                    <span><i class="fa-solid fa-cart-shopping"></i></span>
+                </div>
+                <div class="shop-items">
+                    <!-- Генерация карточек -->
+                    <div class="shop-card"><div class="shop-card-img">👟</div><b>Кроссовки X</b><p style="font-size:12px; color:#888;">120$</p><button class="shop-card-btn">В корзину</button></div>
+                    <div class="shop-card"><div class="shop-card-img">🎧</div><b>Наушники Pro</b><p style="font-size:12px; color:#888;">199$</p><button class="shop-card-btn">В корзину</button></div>
+                    <div class="shop-card"><div class="shop-card-img">⌚</div><b>Часы Smart</b><p style="font-size:12px; color:#888;">250$</p><button class="shop-card-btn">В корзину</button></div>
+                    <div class="shop-card"><div class="shop-card-img">🎒</div><b>Рюкзак Tech</b><p style="font-size:12px; color:#888;">80$</p><button class="shop-card-btn">В корзину</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. AI АССИСТЕНТ -->
+    <div id="aiModal" class="modal-overlay">
+        <div class="modal-apple ai-bg">
+            <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-size: 20px; margin-bottom: 20px;"><i class="fa-solid fa-brain" style="color:var(--accent);"></i> METLA AI Core</h3>
+            <div class="ai-chat-box">
+                <div class="ai-messages" id="aiMessages">
+                    <div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент. Я могу проанализировать ваш договор или написать код. Что вас интересует?</div>
+                </div>
+                <div style="padding: 15px; border-top: 1px solid #e2e8f0; display: flex; gap: 10px;">
+                    <button class="btn-apple" style="flex: 1; padding: 10px; font-size:12px; background: #f1f5f9; color: #0f172a;" onclick="simulateAi('Напиши скрипт парсера на Python')">Скрипт на Python</button>
+                    <button class="btn-apple" style="flex: 1; padding: 10px; font-size:12px; background: #f1f5f9; color: #0f172a;" onclick="simulateAi('Проанализируй рынок IT')">Анализ рынка</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ПАРСЕР ДАННЫХ -->
+    <div id="parserModal" class="modal-overlay">
+        <div class="modal-apple parser-bg">
+            <button class="modal-close" style="color:#fff;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="parser-header"><span>Terminal ~ parser.py</span> <span style="color:#22c55e;">● Running</span></div>
+            <div class="parser-console" id="parserConsole">
+                > Initializing headless browser...<br>
+                > Bypassing Cloudflare protection... [OK]<br>
+                > Fetching target URL...
+            </div>
+            <table class="parser-table">
+                <tr><th>ID</th><th>Товар</th><th>Цена</th><th>Наличие</th></tr>
+                <tbody id="parserTableBody">
+                    <!-- Заполняется JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 4. ТЕРМИНАЛ FALLOUT (РАБОЧИЙ) -->
     <div id="terminalModal" class="modal-overlay">
         <div class="modal-apple fallout-bg">
             <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -429,7 +535,7 @@
                 <input type="number" id="msFreq" class="ms-input" placeholder="Номер частоты (МГц)" autocomplete="off">
                 <input type="password" id="msKey" class="ms-input" placeholder="Ключ шифрования AES" autocomplete="off">
                 <button class="ms-btn" onclick="initMessenger()">ИНИЦИАЛИЗОВАТЬ</button>
-                <p id="msLog" style="color: var(--term-green); font-size: 12px; font-family: monospace; text-align: center; height: 15px; margin-top: 5px;"></p>
+                <p id="msLog" style="color: var(--term-green); font-size: 12px; margin-top: 5px;"></p>
             </div>
 
             <div id="msChat" class="ms-chat">
@@ -439,44 +545,34 @@
                     <div class="msg in">Штаб: Прием. Как слышно? Введите шифровку.</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chatInput" class="ms-input" style="margin:0;" placeholder="Введите сообщение..." onkeypress="handleChatEnter(event)">
-                    <button class="ms-btn" style="width: auto; padding: 0 20px;" onclick="sendTerminalMsg()">></button>
+                    <input type="text" id="chatInput" class="ms-input" style="margin:0; flex-grow: 1;" placeholder="Введите сообщение..." onkeypress="if(event.key === 'Enter') sendTerminalMsg()">
+                    <button class="ms-btn" style="padding: 0 20px;" onclick="sendTerminalMsg()">></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО: ИГРА GALAXY -->
-    <div id="gameModal" class="modal-overlay">
-        <div class="modal-apple" style="background: #1d1d1f; border: 1px solid #333;">
-            <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 style="color: #fff; margin-bottom: 15px; text-align: center;">GALAXY МЕТЛА</h3>
-            <canvas id="gameCanvas" width="300" height="400"></canvas>
-            <button class="btn-apple" style="width: 100%; margin-top: 15px; background: var(--accent);" onclick="startGame()">Старт / Рестарт</button>
-        </div>
-    </div>
-
-    <!-- МОДАЛЬНОЕ ОКНО: ПОЛИТИКА -->
+    <!-- ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ -->
     <div id="policyModal" class="modal-overlay">
         <div class="modal-apple">
             <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="font-size: 24px; margin-bottom: 20px;">Политика конфиденциальности</h2>
+            <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 800;">Политика конфиденциальности</h2>
             <div style="max-height: 50vh; overflow-y: auto; font-size: 14px; color: var(--text-secondary); line-height: 1.6; padding-right: 15px;">
                 <p>Настоящая Политика описывает порядок обработки персональных данных посетителей сайта в соответствии с ФЗ № 152-ФЗ «О персональных данных».</p>
                 <h3 style="color: var(--text-main); margin: 20px 0 10px;">1. Цели сбора данных</h3>
-                <p>Оператор собирает данные (имя, контактный номер или логин Telegram) исключительно в целях предоставления обратной связи по заявкам.</p>
-                <h3 style="color: var(--text-main); margin: 20px 0 10px;">2. Защита информации</h3>
-                <p>Персональные данные никогда не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
+                <p>Оператор собирает данные (имя, контактный номер или логин Telegram) исключительно в целях предоставления обратной связи, разработки архитектуры проекта и подготовки коммерческого предложения.</p>
+                <h3 style="color: var(--text-main); margin: 20px 0 10px;">2. Защита информации (NDA)</h3>
+                <p>Мы соблюдаем строгую коммерческую тайну. Персональные данные и детали вашего проекта никогда не будут переданы третьим лицам или опубликованы в портфолио без вашего письменного согласия.</p>
+                <h3 style="color: var(--text-main); margin: 20px 0 10px;">3. Хранение данных</h3>
+                <p>Сайт использует защищенные протоколы HTTPS. Отправка данных осуществляется в зашифрованном виде (End-to-End). Мы не храним ваши данные на открытых серверах.</p>
             </div>
         </div>
     </div>
 
     <script>
         // ==========================================
-        // ИНТЕРАКТИВ ЛОГОТИПА И ПАРАЛЛАКС
+        // ПАРАЛЛАКС И ЛОГОТИП
         // ==========================================
-        
-        // Полет метлы
         document.getElementById('flyBroom').addEventListener('click', function() {
             if (!this.classList.contains('flying-broom')) {
                 this.classList.add('flying-broom');
@@ -484,70 +580,90 @@
             }
         });
 
-        // Осыпание букв
         const logoText = document.getElementById('interactiveLogoText');
         const letters = document.querySelectorAll('.letter');
         let textClickCount = 0; let fallingIndex = letters.length - 1;
-
         logoText.addEventListener('click', function() {
             textClickCount++;
             if (textClickCount === 1) {
-                this.classList.add('shake-anim');
-                setTimeout(() => { this.classList.remove('shake-anim'); }, 500);
+                this.classList.add('shake-anim'); setTimeout(() => { this.classList.remove('shake-anim'); }, 500);
             } else {
-                if (fallingIndex >= 0) {
-                    letters[fallingIndex].classList.add('fall-anim');
-                    fallingIndex--;
-                }
+                if (fallingIndex >= 0) { letters[fallingIndex].classList.add('fall-anim'); fallingIndex--; }
             }
         });
 
-        // Расстворение Hero и Параллакс фона
         const heroSection = document.getElementById('heroSection');
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
-            
-            // Двигаем фон (теперь он ярче, его видно!)
             document.querySelector('.layer-front').style.transform = `translateY(${scrolled * -0.5}px)`;
             document.querySelector('.layer-back').style.transform = `translateY(${scrolled * -0.15}px)`;
-
             if (heroSection) {
                 let opacity = 1 - (scrolled / 400);
-                let blur = scrolled / 50;
-                let yOffset = scrolled * 0.3;
-                if (opacity < 0) opacity = 0;
-
-                heroSection.style.opacity = opacity;
-                heroSection.style.filter = `blur(${blur}px)`;
-                heroSection.style.transform = `translateY(${yOffset}px)`;
+                heroSection.style.opacity = opacity < 0 ? 0 : opacity;
+                heroSection.style.filter = `blur(${scrolled / 50}px)`;
+                heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
                 heroSection.style.pointerEvents = opacity <= 0.1 ? 'none' : 'auto';
             }
         });
 
         // ==========================================
-        // МОДАЛЬНЫЕ ОКНА И UI
+        // МОДАЛЬНЫЕ ОКНА И ДЕМО-ЛОГИКА
         // ==========================================
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('active'), 10);
-            if (id === 'gameModal') drawGame();
         }
 
         function closeModals() {
             document.querySelectorAll('.modal-overlay').forEach(modal => {
                 modal.classList.remove('active');
-                setTimeout(() => modal.style.display = 'none', 300);
+                setTimeout(() => modal.style.display = 'none', 400);
             });
-            if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId);
         }
 
-        // ==========================================
-        // ФУНКЦИОНАЛ ТЕРМИНАЛА (FALLOUT)
-        // ==========================================
+        // Логика AI Демо
+        function openAiModal() {
+            openModal('aiModal');
+            document.getElementById('aiMessages').innerHTML = '<div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент. Я могу проанализировать ваш договор или написать код. Что вас интересует?</div>';
+        }
+        function simulateAi(text) {
+            const chat = document.getElementById('aiMessages');
+            chat.innerHTML += `<div class="ai-msg ai-user">${text}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            
+            // Имитация печатания
+            const typingId = 'typing_' + Date.now();
+            chat.innerHTML += `<div class="ai-msg ai-bot" id="${typingId}"><div class="typing-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
+            chat.scrollTop = chat.scrollHeight;
+
+            setTimeout(() => {
+                document.getElementById(typingId).remove();
+                chat.innerHTML += `<div class="ai-msg ai-bot">Генерация ответа: Выполнено.<br><br>Стек для вашей задачи подобран. Архитектура готова к развертыванию. Для реальной работы свяжитесь с инженерами METLA.</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 2000);
+        }
+
+        // Логика Парсера Демо
+        function openParserModal() {
+            openModal('parserModal');
+            const console = document.getElementById('parserConsole');
+            const table = document.getElementById('parserTableBody');
+            table.innerHTML = '';
+            console.innerHTML = '> Initializing headless browser...<br>> Bypassing Cloudflare protection... [OK]<br>> Fetching target URL...';
+            
+            setTimeout(() => { console.innerHTML += '<br>> Extracting JSON payload...'; }, 1000);
+            setTimeout(() => { 
+                console.innerHTML += '<br>> Parsing 3 records... [SUCCESS]'; 
+                table.innerHTML += '<tr><td>#101</td><td>Apple MacBook Air M2</td><td>$999</td><td><span style="color:#22c55e;">In Stock</span></td></tr>';
+                table.innerHTML += '<tr><td>#102</td><td>iPhone 15 Pro 256GB</td><td>$1099</td><td><span style="color:#22c55e;">In Stock</span></td></tr>';
+                table.innerHTML += '<tr><td>#103</td><td>Sony WH-1000XM5</td><td>$348</td><td><span style="color:#ef4444;">Out of stock</span></td></tr>';
+            }, 2500);
+        }
+
+        // Логика Терминала
         function openTerminalModal() {
-            document.getElementById('terminalModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('terminalModal').classList.add('active'), 10);
+            openModal('terminalModal');
             document.getElementById('msLogin').style.display = 'flex';
             document.getElementById('msChat').style.display = 'none';
             document.getElementById('msLog').innerText = '';
@@ -555,45 +671,34 @@
 
         function initMessenger() {
             const alias = document.getElementById('msAlias').value || 'Anon';
-            const freq = document.getElementById('msFreq').value || '000.0';
             const log = document.getElementById('msLog');
-            
             log.innerText = '> Установка связи...';
             setTimeout(() => { log.innerText = '> Обмен ключами AES-256...'; }, 600);
             setTimeout(() => { log.innerText = '> Шифрованный туннель поднят.'; }, 1200);
             setTimeout(() => {
                 document.getElementById('msLogin').style.display = 'none';
                 document.getElementById('msChat').style.display = 'flex';
-                document.getElementById('chatHeader').innerText = `FREQ: ${freq} | ALIAS: ${alias}`;
+                document.getElementById('chatHeader').innerText = `SECURE CONNECTION | ALIAS: ${alias}`;
                 document.getElementById('chatInput').focus();
             }, 1800);
-        }
-
-        function handleChatEnter(e) {
-            if (e.key === 'Enter') sendTerminalMsg();
         }
 
         function sendTerminalMsg() {
             const input = document.getElementById('chatInput');
             const val = input.value.trim();
             if (!val) return;
-            
             const chatBox = document.getElementById('msMessages');
-            
-            // Сообщение пользователя
             chatBox.innerHTML += `<div class="msg out">${val}</div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // Имитация ответа штаба
             setTimeout(() => {
-                chatBox.innerHTML += `<div class="msg in">Штаб: Пакет данных принят и зашифрован. Конец связи.</div>`;
+                chatBox.innerHTML += `<div class="msg in">Штаб: Пакет данных принят и зашифрован. Мы свяжемся с вами.</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
             }, 1000);
         }
 
         // ==========================================
-        // ОТПРАВКА БОЕВОЙ ФОРМЫ
+        // БОЕВАЯ ФОРМА С ИНТЕГРАЦИЕЙ GOOGLE GAS
         // ==========================================
         function sanitizeInput(str) {
             return str.replace(/[<>&"']/g, function(m) {
@@ -603,17 +708,20 @@
 
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const lastSubmit = localStorage.getItem('metla_last_submit');
             const now = Date.now();
             if (lastSubmit && now - lastSubmit < 60000) {
-                alert('Щит: Подождите минуту перед следующей отправкой.');
+                alert('🛡 Защита от спама: Подождите минуту перед следующей отправкой.');
                 return;
             }
             
+            // ВАША ЖЕСТКО ЗАДАННАЯ БОЕВАЯ ССЫЛКА НА GOOGLE APPS SCRIPT
             const webAppUrl = 'https://script.google.com/macros/s/AKfycbwxC6JumA9RHgY6OXNFcPN66ySANvF1WeQ6QMxHCWkbM0EC9tL2noTl90hj97_2qnk/exec'; 
+            
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerText;
-            submitBtn.innerText = 'Отправка данных...';
+            submitBtn.innerText = 'Шифрование и отправка...';
             submitBtn.disabled = true;
 
             const data = {
@@ -622,78 +730,27 @@
                 task: sanitizeInput(document.getElementById('userTask').value)
             };
 
-            fetch(webAppUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
+            fetch(webAppUrl, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(data) 
+            })
             .then(r => r.json())
             .then(res => {
                 if (res.status === 'success') { 
-                    alert('Заявка успешно отправлена! Мы свяжемся с вами.'); 
+                    alert('Заявка успешно зашифрована и доставлена в Штаб!'); 
                     localStorage.setItem('metla_last_submit', now);
                     this.reset(); 
-                } else { alert('Произошла ошибка на сервере. Попробуйте позже.'); }
+                } else { 
+                    alert('Произошла ошибка на сервере. Попробуйте позже.'); 
+                }
             })
-            .catch(() => alert('Ошибка соединения. Проверьте интернет.'))
-            .finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
-        });
-
-        // ==========================================
-        // ИГРА GALAXY
-        // ==========================================
-        const canvas = document.getElementById('gameCanvas'); 
-        const ctx = canvas.getContext('2d');
-        let gameLoopId; let frames = 0; let score = 0; let isGameOver = false;
-
-        const player = { x: 135, y: 340, w: 30, h: 40 };
-        let bullets = []; let enemies = []; let stars = [];
-        for(let i=0; i<40; i++) stars.push({ x: Math.random() * 300, y: Math.random() * 400, size: Math.random() * 2, speed: Math.random() * 2 + 1 });
-
-        function updatePlayerPos(clientX) {
-            let rect = canvas.getBoundingClientRect();
-            let scaleX = canvas.width / rect.width; 
-            player.x = (clientX - rect.left) * scaleX - player.w / 2;
-            if (player.x < 0) player.x = 0;
-            if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
-        }
-
-        canvas.addEventListener('mousemove', (e) => { if(!isGameOver) updatePlayerPos(e.clientX); });
-        canvas.addEventListener('touchmove', (e) => { if(!isGameOver && e.target === canvas) { e.preventDefault(); updatePlayerPos(e.touches[0].clientX); } }, {passive: false});
-
-        function drawGame() {
-            ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#fff'; stars.forEach(s => { ctx.fillRect(s.x, s.y, s.size, s.size); });
-            if(!isGameOver) { ctx.font = "30px Arial"; ctx.fillText("🧹", player.x, player.y + 30); }
-            ctx.fillStyle = '#e11d48'; bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); });
-            ctx.font = "24px Arial"; enemies.forEach(e => { ctx.fillText("🛸", e.x, e.y + 20); });
-            ctx.fillStyle = "#fff"; ctx.font = "14px Inter"; ctx.fillText("SCORE: " + score, 10, 25);
-
-            if(isGameOver) {
-                ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = '#e11d48'; ctx.font = "bold 24px Inter"; ctx.textAlign = "center";
-                ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2);
-                ctx.fillStyle = '#fff'; ctx.font = "16px Inter"; ctx.fillText("Score: " + score, canvas.width/2, canvas.height/2 + 30);
-                ctx.textAlign = "left";
-            }
-        }
-
-        function updateGame() {
-            stars.forEach(s => { s.y += s.speed; if(s.y > canvas.height) { s.y = 0; s.x = Math.random() * 300; } });
-            if (frames % 15 === 0) { bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 4, h: 10, speed: 7 }); }
-            bullets.forEach((b, i) => { b.y -= b.speed; if(b.y < 0) bullets.splice(i, 1); });
-            if (frames % 40 === 0) { enemies.push({ x: Math.random() * (canvas.width - 30), y: -30, w: 30, h: 30, speed: Math.random() * 2 + 2 }); }
-
-            enemies.forEach((e, eIndex) => {
-                e.y += e.speed;
-                bullets.forEach((b, bIndex) => {
-                    if (b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
-                        enemies.splice(eIndex, 1); bullets.splice(bIndex, 1); score++;
-                    }
-                });
-                if (e.x < player.x + player.w && e.x + e.w > player.x && e.y < player.y + player.h && e.y + e.h > player.y) { isGameOver = true; }
-                if (e.y > canvas.height) enemies.splice(eIndex, 1);
+            .catch(() => alert('Ошибка соединения. Проверьте интернет-подключение.'))
+            .finally(() => { 
+                submitBtn.innerText = originalText; 
+                submitBtn.disabled = false; 
             });
-        }
-
-        function gameLoop() { if(!isGameOver) { updateGame(); frames++; } drawGame(); if(!isGameOver) { gameLoopId = requestAnimationFrame(gameLoop); } }
-        function startGame() { player.x = 135; bullets = []; enemies = []; score = 0; frames = 0; isGameOver = false; if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId); gameLoop(); }
+        });
     </script>
 </body>
 </html>
