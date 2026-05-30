@@ -25,7 +25,7 @@
             --term-green: #32d74b;
             --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
             --shadow-volumetric: 0 20px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1);
-            --shadow-glow: 0 0 30px rgba(225, 29, 72, 0.2);
+            --shadow-glow: 0 0 30px rgba(225, 19, 72, 0.2);
             --radius-large: 32px;
             --transition-apple: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 
@@ -63,7 +63,7 @@
         .logo-3d { display: flex; align-items: center; gap: 10px; font-size: 34px; font-weight: 900; letter-spacing: -2px; color: #1d1d1f; text-transform: uppercase; text-shadow: none; transition: var(--transition-apple); }
         #flyBroom { color: var(--accent); text-shadow: 1px 1px 0 #be123c, 2px 2px 0 #9f1239, 3px 3px 0 #881337, 0 10px 20px rgba(225, 29, 72, 0.5); cursor: pointer; display: inline-block; transition: 0.3s; }
         #flyBroom:hover { transform: rotate(-15deg) scale(1.1); }
-        #interactiveLogoText { display: inline-block; cursor: pointer; user-select: none; }
+        #interactiveLogoText { display: inline-block; cursor: pointer; user-select: none; position: relative; }
         .letter { display: inline-block; transition: transform 0.3s ease; }
         
         .shake-anim { animation: shakeLogo 0.5s ease-in-out; }
@@ -107,6 +107,8 @@
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
             position: relative; overflow: hidden; 
             display: flex; align-items: flex-start; justify-content: space-between;
+            text-decoration: none; /* Убираем подчеркивание ссылок */
+            color: inherit;
         }
         
         /* Привязка анимаций дыхания к карточкам услуг */
@@ -484,7 +486,7 @@
                 <div class="logo-3d">
                     <i class="fa-solid fa-broom" id="flyBroom" title="Взлет!"></i> 
                     <div id="interactiveLogoText" title="Гравитация!">
-                        <span class="letter">M</span><span class="letter">E</span><span class="letter">T</span><span class="letter">L</span><span class="letter">A</span>
+                        <span class="letter">M</span><span class="letter">E</span><span class="letter">T</span><span class="letter">L</span><span class="letter">A</span><sup style="font-size: 0.5em; opacity: 0.7; pointer-events: none; margin-left: 2px;">™</sup>
                     </div>
                 </div>
                 
@@ -509,7 +511,7 @@
             </div>
         </section>
 
-        <!-- ОБНОВЛЕННЫЕ УСЛУГИ С НЕОНОВЫМИ КАРТОЧКАМИ И АНИМАЦИЯМИ -->
+        <!-- ОБНОВЛЕННЫЕ УСЛУГИ С ССЫЛКАМИ -->
         <section id="services">
             <div class="section-header">
                 <h2>Компетенции</h2>
@@ -519,7 +521,7 @@
             <div class="bento-grid">
                 
                 <!-- Web & SPA -->
-                <div class="apple-card span-8 glow-red">
+                <a href="web_development_spa.html" class="apple-card span-8 glow-red">
                     <div class="card-content-wrap">
                         <div class="card-title">Веб-разработка & SPA</div>
                         <div class="card-text">Проектируем премиальные сайты. От лендингов с высокой конверсией до сложных Single Page Applications. Безупречный UI/UX, оптимизация под SEO и 100 баллов в Google PageSpeed.</div>
@@ -529,19 +531,19 @@
                         <div class="art-web-orb orb-red"></div>
                         <div class="art-web-orb orb-blue"></div>
                     </div>
-                </div>
+                </a>
 
                 <!-- БОТЫ -->
-                <div class="apple-card span-4 glow-green">
+                <a href="telegram_bots_god_level.html" class="apple-card span-4 glow-green">
                     <div class="card-content-wrap" style="max-width: 100%;">
                         <div class="card-title">Telegram-Боты</div>
                         <div class="card-text">Сложные архитектуры на Python. Интеграция с PostgreSQL, платежами и API.</div>
                     </div>
                     <i class="fa-solid fa-robot robot-blink" style="font-size: 100px; color: var(--term-green); margin-top: auto; align-self: flex-end; opacity: 0.8; filter: drop-shadow(0 0 20px rgba(50, 215, 75, 0.5));"></i>
-                </div>
+                </a>
 
                 <!-- WebApps (TMA) -->
-                <div class="apple-card span-12 glow-blue">
+                <a href="telegram_web_app.html" class="apple-card span-12 glow-blue">
                     <div class="card-content-wrap">
                         <div class="card-title">Telegram WebApps (TMA)</div>
                         <div class="card-text">Стираем грань между сайтом и мессенджером. Разрабатываем полноценные интернет-магазины, корпоративные дашборды и CRM-системы, которые открываются прямо внутри Telegram в один клик.</div>
@@ -559,10 +561,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Парсеры -->
-                <div class="apple-card span-6 glow-cyan">
+                <a href="data_scraping_parsers.html" class="apple-card span-6 glow-cyan">
                     <div class="card-content-wrap">
                         <div class="card-title">Data Scraping & Парсеры</div>
                         <div class="card-text">Извлечение данных любой сложности. Напишем скрипт, который соберет цены конкурентов, спарсит каталоги и выгрузит всё в чистую Excel-таблицу. Обходим Cloudflare и капчи.</div>
@@ -575,10 +577,10 @@
                             <div class="data-line"><div class="data-dot"></div></div>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- AI Нейросети -->
-                <div class="apple-card span-6 glow-purple">
+                <a href="ai_integration_neural_networks.html" class="apple-card span-6 glow-purple">
                     <div class="card-content-wrap">
                         <div class="card-title">Внедрение AI (Нейросети)</div>
                         <div class="card-text">Подключаем ChatGPT, Claude или локальные LLM к вашим бизнес-процессам. Создаем умных ассистентов техподдержки, способных понимать контекст и продавать услуги без участия человека.</div>
@@ -590,7 +592,7 @@
                         <div class="art-ai-ring"></div>
                         <div class="art-ai-ring"></div>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
