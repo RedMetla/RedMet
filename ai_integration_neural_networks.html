@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Внедрение AI и Нейросетей | METLA DIGITAL SYNDICATE</title>
+    
+    <!-- SEO База -->
+    <meta name="description" content="Интеграция искусственного интеллекта в ваш бизнес. Разработка умных ботов, автоматизация поддержки, внедрение ChatGPT и нейросетей в бизнес-процессы.">
+    <meta name="keywords" content="внедрение ИИ, нейросети для бизнеса, интеграция chatgpt, ai автоматизация, metla digital syndicate, умные боты">
+    <meta name="author" content="METLA DIGITAL SYNDICATE">
+    <link rel="canonical" href="https://redmetla.github.io/RedMet/ai_integration.html" />
+
+    <!-- Open Graph / Соцсети -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Интеграция ИИ | Делегируйте рутину нейросетям">
+    <meta property="og:description" content="Внедряем мощные языковые модели в ваши процессы. Попробуйте наш ИИ прямо на сайте.">
+    <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
+
+    <!-- SEO Микроразметка (Service) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "AI Integration & Machine Learning",
+      "provider": {
+        "@type": "Organization",
+        "name": "METLA DIGITAL SYNDICATE"
+      },
+      "description": "Разработка и внедрение кастомных решений на базе ИИ: умные ассистенты поддержки, генерация контента, анализ данных.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "RUB",
+          "price": "Индивидуальный расчет"
+        }
+      }
+    }
+    </script>
+
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(99999999, "init", { /* ЗАМЕНИ 99999999 НА СВОЙ СЧЕТЧИК */
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99999999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <style>
+        /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Neural Blue & Deep Purple) */
+        :root {
+            --bg-void: #020205;
+            --ai-blue: #2b58ff;
+            --ai-blue-glow: rgba(43, 88, 255, 0.6);
+            --ai-purple: #9d00ff;
+            --ai-purple-glow: rgba(157, 0, 255, 0.5);
+            --glass-panel: rgba(10, 12, 25, 0.6);
+            --glass-border: rgba(43, 88, 255, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --user-msg: rgba(43, 88, 255, 0.15);
+            --ai-msg: rgba(157, 0, 255, 0.15);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-void); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+        }
+
+        /* КАНВАС: НЕЙРОННАЯ СЕТЬ */
+        #neural-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .vignette { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, transparent 0%, var(--bg-void) 100%); z-index: 1; pointer-events: none; }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .presentation-wrapper {
+            position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center;
+            width: 100%; max-width: 1400px; padding: 60px 20px; box-sizing: border-box; min-height: 100vh;
+        }
+
+        /* ТЕКСТОВЫЙ БЛОК */
+        .promo-header { text-align: center; max-width: 900px; margin-bottom: 40px; perspective: 1000px;}
+        .promo-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; margin-bottom: 20px;
+            line-height: 1.1; text-transform: uppercase; letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--ai-blue) 50%, var(--ai-purple) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(43, 88, 255, 0.4); white-space: nowrap;
+        }
+        .promo-header p { font-size: 1.2rem; color: #a1b2cc; line-height: 1.6; margin-bottom: 30px; }
+
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .tag {
+            background: rgba(43, 88, 255, 0.1); backdrop-filter: blur(5px);
+            border: 1px solid rgba(43, 88, 255, 0.3); padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ ИИ */
+        .ai-terminal {
+            width: 100%; max-width: 1000px; height: 650px;
+            background: var(--glass-panel); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px; border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 30px rgba(43, 88, 255, 0.05), 0 30px 60px rgba(0,0,0,0.9), 0 0 100px rgba(43, 88, 255, 0.15);
+            display: flex; overflow: hidden; position: relative; transition: box-shadow 0.5s, border-color 0.5s;
+        }
+        .ai-terminal.thinking {
+            box-shadow: inset 0 0 30px rgba(157, 0, 255, 0.1), 0 30px 60px rgba(0,0,0,0.9), 0 0 120px rgba(157, 0, 255, 0.3);
+            border-color: rgba(157, 0, 255, 0.4);
+        }
+
+        /* Боковая панель ролей ИИ */
+        .ai-sidebar {
+            width: 220px; background: rgba(0,0,0,0.4); border-right: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 15px; display: flex; flex-direction: column; gap: 15px; z-index: 10;
+        }
+        .sidebar-title { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: bold;}
+        
+        .role-btn {
+            background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+            padding: 15px 12px; border-radius: 12px; cursor: pointer; text-align: left;
+            transition: all 0.3s; display: flex; flex-direction: column; gap: 5px;
+        }
+        .role-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .role-btn.active {
+            background: rgba(43, 88, 255, 0.15); border-color: var(--ai-blue); color: #fff;
+            box-shadow: 0 0 15px var(--ai-blue-glow);
+        }
+        .role-btn.active.purple { background: rgba(157, 0, 255, 0.15); border-color: var(--ai-purple); box-shadow: 0 0 15px var(--ai-purple-glow); }
+        
+        .role-icon { font-size: 1.5rem; }
+        .role-name { font-weight: bold; font-size: 0.95rem; }
+
+        /* Зона чата */
+        .chat-area { flex: 1; display: flex; flex-direction: column; position: relative; background: radial-gradient(circle at center, rgba(43,88,255,0.02) 0%, transparent 100%);}
+        
+        .chat-header {
+            padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);
+        }
+        .model-info { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.1rem; }
+        .pulse-indicator { width: 8px; height: 8px; background: var(--ai-blue); border-radius: 50%; box-shadow: 0 0 10px var(--ai-blue); animation: pulse 2s infinite; }
+        
+        .chat-log {
+            flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth;
+        }
+        .chat-log::-webkit-scrollbar { width: 6px; }
+        .chat-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .message { max-width: 85%; padding: 15px 20px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; animation: slideUp 0.3s ease; position: relative;}
+        .message.system { align-self: center; background: transparent; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; border: 1px dashed rgba(255,255,255,0.1);}
+        .message.user { align-self: flex-end; background: var(--user-msg); border: 1px solid rgba(43, 88, 255, 0.3); border-bottom-right-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .message.ai { align-self: flex-start; background: var(--ai-msg); border: 1px solid rgba(157, 0, 255, 0.3); border-bottom-left-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        
+        .msg-avatar { position: absolute; bottom: -10px; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.7rem; font-weight: bold; background: #000; border: 1px solid rgba(255,255,255,0.2);}
+        .message.user .msg-avatar { right: -10px; border-color: var(--ai-blue); color: var(--ai-blue);}
+        .message.ai .msg-avatar { left: -10px; border-color: var(--ai-purple); color: var(--ai-purple); box-shadow: 0 0 10px var(--ai-purple);}
+
+        /* Индикатор печати */
+        .typing-indicator { display: none; gap: 5px; padding: 15px 20px; align-self: flex-start; background: transparent; }
+        .typing-indicator.active { display: flex; }
+        .t-dot { width: 8px; height: 8px; background: var(--ai-purple); border-radius: 50%; animation: typeBounce 1.4s infinite ease-in-out both; }
+        .t-dot:nth-child(1) { animation-delay: -0.32s; }
+        .t-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        /* Ввод пользователя */
+        .chat-input-area { padding: 20px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.05); }
+        .input-wrapper { display: flex; gap: 10px; background: #05050a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 5px; transition: border-color 0.3s; }
+        .input-wrapper:focus-within { border-color: var(--ai-blue); box-shadow: 0 0 15px rgba(43, 88, 255, 0.2); }
+        
+        .chat-input {
+            flex: 1; background: transparent; border: none; padding: 15px 20px; color: #fff;
+            font-size: 1rem; outline: none; font-family: inherit; resize: none; height: 24px; max-height: 100px;
+        }
+        .chat-input::placeholder { color: rgba(255,255,255,0.3); }
+        
+        .btn-send {
+            background: var(--ai-blue); color: #fff; border: none; width: 50px; height: 50px;
+            border-radius: 12px; display: flex; justify-content: center; align-items: center; cursor: pointer;
+            transition: 0.3s; font-size: 1.2rem; align-self: flex-end;
+        }
+        .btn-send:hover { background: #4068ff; box-shadow: 0 0 15px var(--ai-blue-glow); transform: scale(1.05); }
+        .btn-send:disabled { background: #333; color: #666; cursor: not-allowed; box-shadow: none; transform: none; }
+
+        /* КАРТОЧКИ УСЛУГ */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+            width: 100%; max-width: 1100px; margin-top: 80px; margin-bottom: 50px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            padding: 35px 25px; border-radius: 20px; transition: transform 0.3s, border-color 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .feature-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; background: linear-gradient(90deg, var(--ai-blue), var(--ai-purple)); opacity: 0; transition: 0.3s;}
+        .feature-card:hover { transform: translateY(-5px); border-color: rgba(43, 88, 255, 0.3); background: rgba(43, 88, 255, 0.02);}
+        .feature-card:hover::before { opacity: 1; }
+        .f-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));}
+        .f-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 15px; color: #fff; }
+        .f-desc { font-size: 0.95rem; color: #8b9bb4; line-height: 1.6; }
+
+        /* АНИМАЦИИ */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 10px var(--ai-blue); } 50% { opacity: 0.4; box-shadow: 0 0 2px var(--ai-blue); } 100% { opacity: 1; box-shadow: 0 0 10px var(--ai-blue); } }
+        @keyframes typeBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* АДАПТИВ */
+        @media (max-width: 900px) {
+            .presentation-wrapper { padding: 30px 15px; }
+            .promo-header h1 { font-size: clamp(2rem, 6vw, 3.5rem); white-space: normal; }
+            
+            .ai-terminal { flex-direction: column; height: 750px; }
+            .ai-sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 15px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .ai-sidebar::-webkit-scrollbar { display: none; }
+            .role-btn { flex-direction: row; align-items: center; min-width: max-content; padding: 10px 15px; }
+            .role-desc { display: none; } /* Скрываем описание роли на мобилках */
+            .sidebar-title { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Живой фон (Нейронная сеть) -->
+    <canvas id="neural-canvas"></canvas>
+    <div class="vignette"></div>
+
+    <main class="presentation-wrapper">
+        
+        <!-- Заголовок -->
+        <div class="promo-header">
+            <h1>Нейро-Интеграция</h1>
+            <p>Ваши конкуренты до сих пор нанимают операторов и пишут тексты вручную. Мы предлагаем подключить <b>настоящий ИИ</b> к вашим бизнес-процессам. Протестируйте возможности нейросети Синдиката прямо сейчас.</p>
+            <div class="tag-container">
+                <div class="tag">#LLM</div>
+                <div class="tag">#RAG_Systems</div>
+                <div class="tag">#Автоматизация</div>
+            </div>
+        </div>
+
+        <!-- ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ ИИ (РАБОЧИЙ) -->
+        <div class="ai-terminal" id="terminal-container">
+            
+            <!-- Боковое меню ролей -->
+            <div class="ai-sidebar">
+                <div class="sidebar-title">Выбор Модуля</div>
+                
+                <button class="role-btn active" onclick="switchRole('consultant', this)">
+                    <span class="role-icon">💬</span>
+                    <div>
+                        <div class="role-name">Консультант</div>
+                        <div class="role-desc" style="font-size:0.75rem; opacity:0.7; margin-top:2px;">Поддержка клиентов 24/7</div>
+                    </div>
+                </button>
+
+                <button class="role-btn" onclick="switchRole('analyst', this)">
+                    <span class="role-icon">📊</span>
+                    <div>
+                        <div class="role-name">Аналитик</div>
+                        <div class="role-desc" style="font-size:0.75rem; opacity:0.7; margin-top:2px;">Анализ данных и выводы</div>
+                    </div>
+                </button>
+
+                <button class="role-btn" onclick="switchRole('copywriter', this)">
+                    <span class="role-icon">✍️</span>
+                    <div>
+                        <div class="role-name">Копирайтер</div>
+                        <div class="role-desc" style="font-size:0.75rem; opacity:0.7; margin-top:2px;">Генерация контента</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Зона чата -->
+            <div class="chat-area">
+                <div class="chat-header">
+                    <div class="model-info">
+                        <div class="pulse-indicator" id="status-pulse"></div>
+                        <span id="current-model-name">Модуль: Консультант (Gemini Core)</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">LIVE DEMO</div>
+                </div>
+
+                <div class="chat-log" id="chat-log">
+                    <div class="message system">Система инициализирована. ИИ готов к работе.</div>
+                    <div class="message ai">
+                        <div class="msg-avatar">AI</div>
+                        Приветствую. Я — нейро-ассистент METLA DIGITAL SYNDICATE. В режиме "Консультант" я могу показать, как ИИ отвечает на вопросы ваших клиентов. Напишите мне что-нибудь или задайте вопрос.
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typing-indicator">
+                    <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <textarea class="chat-input" id="chat-input" placeholder="Введите ваш запрос ИИ..." oninput="autoResize(this)" onkeydown="handleEnter(event)"></textarea>
+                        <button class="btn-send" id="btn-send" onclick="sendMessage()">➤</button>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by Gemini 2.5 API. Ответы генерируются в реальном времени.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Преимущества интеграции -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="f-icon">🧠</div>
+                <div class="f-title">Умные Боты Поддержки</div>
+                <div class="f-desc">Подключаем ChatGPT или аналоги к вашему Telegram-боту или сайту. Бот обучается на ваших базах знаний (RAG) и консультирует клиентов лучше стажеров.</div>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">⚡</div>
+                <div class="f-title">Генерация Контента</div>
+                <div class="f-desc">Автоматическое написание SEO-статей, постов для соцсетей и описаний товаров на основе ваших вводных данных. Экономия сотен часов.</div>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🔗</div>
+                <div class="f-title">API & Автоматизация</div>
+                <div class="f-desc">Связываем нейросети с вашими CRM-системами. ИИ сам анализирует заявки, классифицирует лидов и составляет отчеты.</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- 1. КАНВАС ФОН (НЕЙРОННАЯ СЕТЬ) ---
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let nodes = [];
+        let isThinking = false; // Глобальный флаг состояния ИИ
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const nodeCount = window.innerWidth < 768 ? 40 : 80;
+        for(let i=0; i<nodeCount; i++) {
+            nodes.push({ 
+                x: Math.random() * width, y: Math.random() * height, 
+                vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8, 
+                radius: Math.random() * 2 + 1 
+            });
+        }
+
+        function drawNeuralNetwork() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Цвета зависят от того, думает ИИ или нет
+            const baseColor = isThinking ? 'rgba(157, 0, 255, ' : 'rgba(43, 88, 255, ';
+            const speedMult = isThinking ? 2.5 : 1; // При раздумьях сеть движется быстрее
+
+            nodes.forEach((node, i) => {
+                node.x += node.vx * speedMult; 
+                node.y += node.vy * speedMult;
+                if(node.x < 0 || node.x > width) node.vx *= -1;
+                if(node.y < 0 || node.y > height) node.vy *= -1;
+
+                ctx.beginPath(); ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = baseColor + '0.6)';
+                ctx.fill();
+
+                for(let j = i + 1; j < nodes.length; j++) {
+                    let d = Math.hypot(node.x - nodes[j].x, node.y - nodes[j].y);
+                    if(d < 150) { 
+                        ctx.beginPath(); ctx.moveTo(node.x, node.y); ctx.lineTo(nodes[j].x, nodes[j].y); 
+                        ctx.strokeStyle = baseColor + `${0.2 * (1 - d/150)})`; 
+                        ctx.lineWidth = isThinking ? 1.5 : 0.8; 
+                        ctx.stroke(); 
+                    }
+                }
+            });
+            requestAnimationFrame(drawNeuralNetwork);
+        }
+        drawNeuralNetwork();
+
+        // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (GEMINI API) ---
+        
+        // ВНИМАНИЕ: Окружение Canvas само подставит ключ в apiKey.
+        const apiKey = ""; 
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        const chatLog = document.getElementById('chat-log');
+        const inputField = document.getElementById('chat-input');
+        const btnSend = document.getElementById('btn-send');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const terminalContainer = document.getElementById('terminal-container');
+        const pulseIndicator = document.getElementById('status-pulse');
+        const modelNameDisplay = document.getElementById('current-model-name');
+
+        let currentRole = 'consultant';
+
+        // Системные промпты для разных ролей
+        const systemPrompts = {
+            consultant: "Ты профессиональный ИИ-ассистент компании METLA DIGITAL SYNDICATE. Отвечай на вопросы пользователя полно, развернуто, вежливо и компетентно. Твоя задача — продемонстрировать максимальный интеллект и пользу. Язык ответов: русский.",
+            analyst: "Ты продвинутый ИИ-аналитик компании METLA. Отвечай на вопросы пользователя максимально полно, с глубоким анализом, фактами и логическими выводами. Показывай профессионализм. Язык: русский.",
+            copywriter: "Ты гениальный ИИ-копирайтер компании METLA. Пиши тексты полностью, развернуто, с креативным подходом. Создавай готовые к публикации шедевры, используй форматирование и эмодзи. Язык: русский."
+        };
+
+        const roleNames = { consultant: "Консультант", analyst: "Аналитик", copywriter: "Копирайтер" };
+        const roleColors = { consultant: "blue", analyst: "blue", copywriter: "purple" }; // Для UI эффектов
+
+        function switchRole(role, btnElement) {
+            if(isThinking) return; // Блокируем смену во время генерации
+            
+            document.querySelectorAll('.role-btn').forEach(el => {
+                el.classList.remove('active');
+                el.classList.remove('purple');
+            });
+            
+            btnElement.classList.add('active');
+            if(role === 'copywriter') btnElement.classList.add('purple');
+            
+            currentRole = role;
+            modelNameDisplay.innerText = `Модуль: ${roleNames[role]} (Gemini Core)`;
+            
+            if(navigator.vibrate) navigator.vibrate(15);
+
+            // Очищаем чат и пишем приветствие новой роли
+            chatLog.innerHTML = `<div class="message system">Режим изменен. Активирован модуль "${roleNames[role]}".</div>`;
+            
+            let greeting = "";
+            if(role === 'consultant') greeting = "Режим Консультанта активен. Готов ответить на вопросы ваших клиентов.";
+            if(role === 'analyst') greeting = "Модуль Аналитики загружен. Ожидаю данные или задачу для структурирования.";
+            if(role === 'copywriter') greeting = "Режим Копирайтера включен! ✍️ Напишите тему, и я выдам вам огненный продающий текст.";
+            
+            appendMessage('ai', greeting);
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = '24px';
+            textarea.style.height = Math.min(textarea.scrollHeight, 100) + 'px';
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            
+            let avatar = '';
+            if(sender === 'user') avatar = '<div class="msg-avatar">U</div>';
+            if(sender === 'ai') avatar = '<div class="msg-avatar">AI</div>';
+
+            msgDiv.innerHTML = `${avatar}${text.replace(/\n/g, '<br>')}`;
+            chatLog.appendChild(msgDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // Анимация печати текста для ИИ (чтобы не вываливать весь текст разом)
+        async function typeAiMessage(text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ai`;
+            msgDiv.innerHTML = `<div class="msg-avatar">AI</div><span class="content"></span>`;
+            chatLog.appendChild(msgDiv);
+            
+            const contentSpan = msgDiv.querySelector('.content');
+            
+            // Простая имитация печати
+            for (let i = 0; i < text.length; i++) {
+                contentSpan.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+                if(i % 3 === 0) chatLog.scrollTop = chatLog.scrollHeight; // Скроллим не каждый кадр
+                await new Promise(r => setTimeout(r, 10)); // Скорость печати
+            }
+            chatLog.scrollTop = chatLog.scrollHeight;
+            if(navigator.vibrate) navigator.vibrate(20); // Вибро в конце ответа
+        }
+
+        async function sendMessage() {
+            const text = inputField.value.trim();
+            if (!text || isThinking) return;
+
+            // 1. UI Updates (User sending)
+            inputField.value = '';
+            autoResize(inputField);
+            appendMessage('user', text);
+            if(navigator.vibrate) navigator.vibrate(10);
+
+            // 2. Set Thinking State
+            isThinking = true;
+            btnSend.disabled = true;
+            typingIndicator.classList.add('active');
+            terminalContainer.classList.add('thinking');
+            pulseIndicator.style.background = 'var(--ai-purple)';
+            pulseIndicator.style.boxShadow = '0 0 10px var(--ai-purple)';
+            chatLog.scrollTop = chatLog.scrollHeight;
+
+            // 3. API Call to Gemini
+            try {
+                // Если API ключ пустой (вне песочницы), показываем фейк-ответ для красоты лендинга
+                if (apiKey === "PLACEHOLDER_KEY_FOR_LOCAL_TESTING" || typeof apiKey === 'undefined') {
+                    throw new Error("Local Demo Mode");
+                }
+
+                const payload = {
+                    contents: [{ parts: [{ text: text }] }],
+                    systemInstruction: { parts: [{ text: systemPrompts[currentRole] }] }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error('API Network Error');
+
+                const data = await response.json();
+                const aiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Ошибка обработки данных модулем.";
+                
+                // Скрываем индикатор и печатаем ответ
+                typingIndicator.classList.remove('active');
+                await typeAiMessage(aiResponseText);
+
+            } catch (error) {
+                console.error("AI Error:", error);
+                typingIndicator.classList.remove('active');
+                
+                // Fallback (Если API не отвечает или лимиты)
+                let fallbackMsg = "⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Нейросеть работает в изолированном режиме. Чтобы ИИ отвечал на вашем сайте полноценно, необходимо получить бесплатный ключ в Google AI Studio и вставить его в переменную apiKey в коде страницы.";
+                
+                await typeAiMessage(fallbackMsg);
+            } finally {
+                // 4. Reset State
+                isThinking = false;
+                btnSend.disabled = false;
+                terminalContainer.classList.remove('thinking');
+                pulseIndicator.style.background = 'var(--ai-blue)';
+                pulseIndicator.style.boxShadow = '0 0 10px var(--ai-blue)';
+            }
+        }
+    </script>
+</body>
+</html>

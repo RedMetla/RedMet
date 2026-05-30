@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO База -->
+    <title>Создание Telegram-бота: Инструкция BotFather | METLA</title>
+    <meta name="description" content="Пошаговая инструкция по созданию Telegram-бота, получению API токена и настройке через BotFather. Разработка ботов любой сложности от METLA.">
+    <meta name="keywords" content="создать telegram бота, получить токен бота, botfather инструкция, разработка ботов, metla digital syndicate">
+    <link rel="canonical" href="https://redmetla.github.io/RedMet/telegram-bots.html" />
+
+    <!-- SEO Микроразметка (Schema.org HowTo) -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "HowTo",
+      "name": "Как создать Telegram-бота и получить API Token",
+      "description": "Пошаговое руководство по регистрации нового бота в Telegram через официального BotFather.",
+      "step": [
+        { "@type": "HowToStep", "name": "Поиск BotFather", "text": "Найдите в Telegram бота @BotFather и отправьте /start." },
+        { "@type": "HowToStep", "name": "Создание", "text": "Отправьте команду /newbot и укажите Имя бота." },
+        { "@type": "HowToStep", "name": "Username", "text": "Укажите уникальный Username (на латинице, заканчивается на bot)." },
+        { "@type": "HowToStep", "name": "Токен", "text": "Скопируйте и надежно сохраните выданный API Token." },
+        { "@type": "HowToStep", "name": "Настройка профиля", "text": "Добавьте описание и аватарку через команды /setdescription и /setuserpic." }
+      ]
+    }
+    </script>
+    
+    <style>
+        /* Базовые настройки и шрифты (Оригинал) */
+        :root {
+            --bg-dark: #05050a;
+            --bg-light: #1d1d1f;
+            --neon-red: #ff4b72;
+            --neon-blue: #00f3ff;
+            --text-main: #ffffff;
+            --text-muted: #86868b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Canvas для сложного фона */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Затемнение по краям */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, transparent 0%, rgba(5,5,10, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .content > * {
+            pointer-events: auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 75, 114, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Терминал */
+        .terminal {
+            width: 100%;
+            background: rgba(20, 20, 25, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 75, 114, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 75, 114, 0.1) inset;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 75, 114, 0.2) inset;
+            border-color: rgba(255, 75, 114, 0.4);
+        }
+
+        .terminal-header {
+            background: rgba(10, 10, 15, 0.9);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-left { display: flex; align-items: center; }
+        .terminal-dots { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+        .terminal-title { margin-left: 20px; color: var(--text-muted); font-family: monospace; font-size: 0.9rem; }
+
+        .phase-indicator { display: flex; gap: 5px; margin-right: 10px; }
+        .phase-dot { width: 8px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: background 0.3s; }
+        .phase-dot.active { background: var(--neon-red); box-shadow: 0 0 8px var(--neon-red); }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            height: 350px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .terminal-body::-webkit-scrollbar { width: 6px; }
+        .terminal-body::-webkit-scrollbar-track { background: transparent; }
+        .terminal-body::-webkit-scrollbar-thumb { background: rgba(255, 75, 114, 0.2); border-radius: 3px; }
+
+        .line {
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.3s forwards;
+            word-wrap: break-word;
+        }
+
+        .prompt { color: var(--neon-red); margin-right: 10px; font-weight: bold; }
+        .command { color: var(--neon-blue); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+        .command:hover { text-shadow: 0 0 8px var(--neon-blue); }
+        .system { color: var(--text-muted); }
+        .highlight { color: #fff; font-weight: bold; }
+        .warning { color: #ffbd2e; }
+        
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        /* Иконка Telegram в тексте */
+        .tg-icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: #0088cc;
+            margin-right: 4px;
+            filter: drop-shadow(0 0 4px rgba(0, 136, 204, 0.6));
+        }
+
+        .terminal-footer {
+            padding: 15px 20px;
+            background: rgba(10, 10, 15, 0.5);
+            border-top: 1px dashed rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-text { color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
+
+        .btn-start {
+            background: transparent;
+            color: var(--neon-red);
+            border: 2px solid var(--neon-red);
+            padding: 10px 25px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 75, 114, 0.2);
+            display: none;
+        }
+        .btn-start.visible { display: block; }
+        .btn-start:hover { background: var(--neon-red); color: #000; box-shadow: 0 0 25px var(--neon-red); }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--neon-red);
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Внутри-терминальная форма (Уровень Психолог 500) */
+        .term-form-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .term-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed rgba(255, 75, 114, 0.4);
+            color: var(--neon-blue);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            padding: 5px;
+            flex-grow: 1;
+            margin-left: 10px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .term-input:focus {
+            border-bottom: 1px solid var(--neon-blue);
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.1);
+        }
+        .term-input::placeholder { color: rgba(134, 134, 139, 0.5); }
+        .form-btn {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 8px 20px;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        .form-btn:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .terminal-title { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фон Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="overlay"></div>
+
+    <!-- Контент -->
+    <main class="content">
+        <h1>Поднятие Telegram-бота</h1>
+        <p class="subtitle">Пошаговая инициализация ядра и настройка через BotFather</p>
+
+        <!-- Терминал -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="header-left">
+                    <div class="terminal-dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">root@metla-syndicate: ~/bot-setup</div>
+                </div>
+                <div class="phase-indicator" id="phase-indicator">
+                    <div class="phase-dot" id="phase-0"></div>
+                    <div class="phase-dot" id="phase-1"></div>
+                    <div class="phase-dot" id="phase-2"></div>
+                    <div class="phase-dot" id="phase-3"></div>
+                    <div class="phase-dot" id="phase-4"></div>
+                </div>
+            </div>
+            
+            <div class="terminal-body" id="term-body">
+                <div class="line"><span class="system">Нажмите "СТАРТ ПРОТОКОЛА" для начала инструктажа...</span></div>
+            </div>
+
+            <div class="terminal-footer">
+                <div class="status-text" id="status-text">Ожидание...</div>
+                <button class="btn-start visible" id="start-btn" onclick="nextPhase()">Старт протокола</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- 1. АНИМАЦИЯ ФОНА (С МЕРЦАЮЩИМИ ЗВЕЗДАМИ И ПАСХАЛКОЙ) ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        let mouse = { x: 0, y: 0 };
+
+        const symbols = ['{', '}', '</>', '();', '=>', '[]', '#', '*', '01', 'NaN', 'null'];
+        const broomPath = new Path2D("M80,20 L60,40 L45,35 L40,55 L25,65 Q15,75 10,90 Q25,85 35,75 L45,60 L65,55 L60,40 Z");
+
+        // Объект пасхалки (Летящая метла)
+        let shootingBroom = {
+            active: false,
+            x: 0, y: 0,
+            speedX: 0, speedY: 0,
+            size: 22,
+            trail: [],
+            lastSpawn: Date.now(),
+            hyperDrive: false // Состояние после клика
+        };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            mouse.x = width / 2;
+            mouse.y = height / 2;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // Ловец кликов по пасхалке
+        canvas.addEventListener('click', (e) => {
+            if (!shootingBroom.active || shootingBroom.hyperDrive) return;
+            // Проверка дистанции от клика до летящей метлы
+            const dx = e.clientX - shootingBroom.x;
+            const dy = e.clientY - shootingBroom.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            
+            if (dist < shootingBroom.size * 3) { // Радиус поражения
+                shootingBroom.hyperDrive = true;
+                // Имитация рикошета/гиперпрыжка
+                shootingBroom.speedX *= -1.5;
+                shootingBroom.speedY *= 1.5;
+                createExplosion(shootingBroom.x, shootingBroom.y);
+            }
+        });
+
+        // Массив для визуального взрыва при клике на метлу
+        let explosions = [];
+        function createExplosion(x, y) {
+            for(let i=0; i<10; i++) {
+                explosions.push({
+                    x: x, y: y,
+                    vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8,
+                    life: 1.0
+                });
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = window.innerWidth < 768 ? 50 : 120;
+            
+            for (let i = 0; i < count; i++) {
+                // Выбираем 2-3 частицы, которые будут "мерцать как звезды"
+                const isTwinkler = i < 3; 
+                
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    z: Math.random() * 2 + 0.1, 
+                    type: Math.random() > 0.8 ? 'broom' : 'symbol',
+                    symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                    color: Math.random() > 0.5 ? '#ff4b72' : '#00f3ff',
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    twinkle: isTwinkler,
+                    twinkleSpeed: 0.001 + Math.random() * 0.002
+                });
+            }
+        }
+
+        function spawnShootingBroom() {
+            shootingBroom.active = true;
+            shootingBroom.hyperDrive = false;
+            shootingBroom.trail = [];
+            
+            // Спавн за экраном (слева или справа)
+            if (Math.random() > 0.5) {
+                shootingBroom.x = -50;
+                shootingBroom.speedX = 3 + Math.random() * 2;
+            } else {
+                shootingBroom.x = width + 50;
+                shootingBroom.speedX = -(3 + Math.random() * 2);
+            }
+            shootingBroom.y = Math.random() * height * 0.7; // В верхней части экрана
+            shootingBroom.speedY = (Math.random() - 0.5) * 2;
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            const mouseOffsetX = (mouse.x - width / 2) * 0.05;
+            const mouseOffsetY = (mouse.y - height / 2) * 0.05;
+            const now = Date.now();
+
+            // 1. Отрисовка обычного фона
+            particles.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+
+                if (p.x > width + 50) p.x = -50;
+                if (p.x < -50) p.x = width + 50;
+                if (p.y > height + 50) p.y = -50;
+                if (p.y < -50) p.y = height + 50;
+
+                const px = p.x - mouseOffsetX * p.z;
+                const py = p.y - mouseOffsetY * p.z;
+
+                let alpha = Math.min(1, p.z * 0.3);
+                
+                // Эффект мерцания звезд
+                if (p.twinkle) {
+                    alpha = Math.abs(Math.sin(now * p.twinkleSpeed)) * 0.8 + 0.1;
+                }
+
+                const size = p.z * 15; 
+
+                ctx.save();
+                ctx.translate(px, py);
+                
+                if (p.type === 'symbol') {
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = alpha * 0.5;
+                    ctx.font = `${size}px monospace`;
+                    // Если мерцает - делаем белым для контраста "звезды"
+                    if(p.twinkle) {
+                        ctx.fillStyle = "#ffffff";
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = "#ffffff";
+                    }
+                    ctx.fillText(p.symbol, 0, 0);
+                } else {
+                    const scale = (size / 100) * 1.5;
+                    ctx.scale(scale, scale);
+                    ctx.strokeStyle = p.color;
+                    ctx.globalAlpha = alpha * 0.3;
+                    ctx.lineWidth = 2;
+                    ctx.stroke(broomPath);
+                }
+                ctx.restore();
+            });
+
+            // 2. Логика и отрисовка Летящей метлы
+            if (!shootingBroom.active && (now - shootingBroom.lastSpawn > 12000)) {
+                // Шанс спавна каждые 12+ сек
+                if(Math.random() < 0.01) spawnShootingBroom();
+            }
+
+            if (shootingBroom.active) {
+                shootingBroom.x += shootingBroom.speedX;
+                shootingBroom.y += shootingBroom.speedY;
+                
+                // Сохраняем хвост
+                shootingBroom.trail.push({x: shootingBroom.x, y: shootingBroom.y});
+                if (shootingBroom.trail.length > 20) shootingBroom.trail.shift();
+
+                // Отрисовка хвоста (шлейф)
+                ctx.beginPath();
+                for (let i = 0; i < shootingBroom.trail.length; i++) {
+                    const t = shootingBroom.trail[i];
+                    ctx.lineTo(t.x, t.y);
+                }
+                ctx.strokeStyle = shootingBroom.hyperDrive ? '#00f3ff' : 'rgba(255, 75, 114, 0.4)';
+                ctx.lineWidth = shootingBroom.hyperDrive ? 4 : 2;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Отрисовка самой метлы
+                ctx.save();
+                ctx.translate(shootingBroom.x, shootingBroom.y);
+                // Поворот по вектору движения
+                const angle = Math.atan2(shootingBroom.speedY, shootingBroom.speedX);
+                ctx.rotate(angle);
+                
+                const scale = (shootingBroom.size / 100) * 1.5;
+                ctx.scale(scale, scale);
+                ctx.strokeStyle = shootingBroom.hyperDrive ? '#00f3ff' : '#ff4b72';
+                ctx.globalAlpha = 1;
+                ctx.lineWidth = 3;
+                // Эффект неона/объема
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = shootingBroom.hyperDrive ? '#00f3ff' : '#ff4b72';
+                ctx.stroke(broomPath);
+                ctx.restore();
+
+                // Проверка на вылет за экран
+                if (shootingBroom.x < -100 || shootingBroom.x > width + 100 || shootingBroom.y < -100 || shootingBroom.y > height + 100) {
+                    shootingBroom.active = false;
+                    shootingBroom.lastSpawn = now;
+                }
+            }
+
+            // 3. Взрывы (если кликнули на метлу)
+            for(let i = explosions.length - 1; i >= 0; i--) {
+                let e = explosions[i];
+                e.x += e.vx; e.y += e.vy;
+                e.life -= 0.05;
+                if(e.life <= 0) { explosions.splice(i, 1); continue; }
+                
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 2, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(0, 243, 255, ${e.life})`;
+                ctx.fill();
+            }
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        initParticles();
+        drawParticles();
+
+        // --- 2. ЛОГИКА ТЕРМИНАЛА И ФОРМЫ (ПСИХОЛОГ 500 УРОВНЯ) ---
+        const termBody = document.getElementById('term-body');
+        const startBtn = document.getElementById('start-btn');
+        const statusText = document.getElementById('status-text');
+        
+        let currentPhase = 0;
+        let isTyping = false;
+
+        // Иконка Telegram (SVG строка)
+        const tgIcon = `<svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.96 1.25-5.54 3.67-.52.36-.99.54-1.41.53-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.36-.48.98-.74 3.85-1.68 6.43-2.79 7.72-3.33 3.67-1.53 4.43-1.8 4.93-1.81.11 0 .36.03.49.14.11.09.15.22.16.35-.01.07-.01.19-.03.29z"/></svg>`;
+
+        const phases = [
+            [
+                { type: "system", text: "ФАЗА 1: Подключение к серверам Telegram...", delay: 600 },
+                { type: "text", text: `Откройте ${tgIcon} Telegram и найдите официального бота <span class='highlight'>@BotFather</span> (с синей галочкой).`, delay: 800 },
+                { type: "text", text: "Запустите его, нажав кнопку 'Старт', или отправьте команду:", delay: 500 },
+                { type: "command", text: "/start", tooltip: "Нажмите, чтобы скопировать", delay: 500 }
+            ],
+            [
+                { type: "system", text: "ФАЗА 2: Инициализация нового агента...", delay: 600 },
+                { type: "text", text: "Отправьте команду для создания нового бота:", delay: 500 },
+                { type: "command", text: "/newbot", tooltip: "Нажмите, чтобы скопировать", delay: 800 },
+                { type: "text", text: "BotFather попросит придумать <span class='highlight'>Name (Имя бота)</span>.", delay: 800 },
+                { type: "text", text: "Это имя будут видеть пользователи (например: Metla Support). Введите его и отправьте.", delay: 500 }
+            ],
+            [
+                { type: "system", text: "ФАЗА 3: Регистрация уникального адреса...", delay: 600 },
+                { type: "text", text: "Теперь введите <span class='highlight'>Username</span> (системное имя-ссылку).", delay: 800 },
+                { type: "warning", text: "ВНИМАНИЕ: Только английские буквы, без пробелов. Обязательно должно заканчиваться на 'bot'.", delay: 1000 },
+                { type: "text", text: "Пример правильного юзернейма:", delay: 500 },
+                { type: "command", text: "my_syndicate_bot", tooltip: "Это лишь пример", delay: 500 }
+            ],
+            [
+                { type: "system", text: "ФАЗА 4: Генерация криптографических ключей...", delay: 800 },
+                { type: "text", text: "Бот создан! BotFather пришлет длинное сообщение.", delay: 800 },
+                { type: "text", text: "Найдите в нем строку, похожую на эту:", delay: 500 },
+                { type: "command", text: "1234567890:AAH_XxYyZz...", tooltip: "Скопируйте свой токен в Telegram", delay: 1000 },
+                { type: "warning", text: "[КРИТИЧЕСКИ ВАЖНО] Это ваш API Token. Сохраните его в надежном месте. Никому его не передавайте!", delay: 500 }
+            ],
+            [
+                { type: "system", text: "ФАЗА 5: Настройка визуальной оболочки...", delay: 600 },
+                { type: "text", text: "Чтобы бот выглядел профессионально, задайте ему описание и аватарку.", delay: 800 },
+                { type: "text", text: "Полезные команды BotFather:", delay: 500 },
+                { type: "command", text: "/setdescription", tooltip: "Нажмите, чтобы скопировать", delay: 300 },
+                { type: "command", text: "/setuserpic", tooltip: "Нажмите, чтобы скопировать", delay: 800 },
+                { type: "system", text: "Оболочка бота готова. Теперь ему нужны мозги и логика.", delay: 1000 },
+                { type: "highlight", text: "Синдикат METLA готов взять на себя написание кода, ИИ и интеграции.", delay: 0 }
+            ]
+        ];
+
+        async function nextPhase() {
+            if (isTyping || currentPhase >= phases.length) return;
+            
+            isTyping = true;
+            startBtn.classList.remove('visible');
+            statusText.innerText = `Выполнение фазы 0${currentPhase + 1}...`;
+
+            if(currentPhase === 0) {
+                termBody.innerHTML = '';
+            } else {
+                printHTML(`<div class="line" style="border-top: 1px dashed rgba(255,255,255,0.1); margin: 15px 0;"></div>`);
+            }
+
+            document.getElementById(`phase-${currentPhase}`).classList.add('active');
+            const scenario = phases[currentPhase];
+            
+            for (let step of scenario) {
+                await typeLine(step);
+                scrollToBottom();
+            }
+
+            isTyping = false;
+            currentPhase++;
+
+            if (currentPhase < phases.length) {
+                statusText.innerText = "Ожидание подтверждения...";
+                startBtn.innerText = "Продолжить";
+                startBtn.classList.add('visible');
+            } else {
+                statusText.innerText = "Все фазы протокола завершены.";
+                startBtn.innerText = "Установить защищенную связь";
+                // Секретный триггер формы
+                startBtn.onclick = openTerminalForm; 
+                startBtn.classList.add('visible');
+                printHTML(`<div class="line"><span class="prompt">~</span><span class="cursor"></span></div>`);
+            }
+            scrollToBottom();
+        }
+
+        // Интеграция формы внутрь терминала
+        function openTerminalForm() {
+            startBtn.classList.remove('visible');
+            statusText.innerText = "Установка зашифрованного канала...";
+            
+            // Удаляем курсор от предыдущего шага
+            const cursors = document.querySelectorAll('.cursor');
+            cursors.forEach(c => c.remove());
+
+            printHTML(`<div class="line" style="border-top: 1px dashed rgba(0,243,255,0.4); margin: 15px 0;"></div>`);
+            printHTML(`<div class="line"><span class="system" style="color:var(--neon-blue);">[SECURE CHANNEL ESTABLISHED] Инициализация протокола связи с Синдикатом...</span></div>`);
+            
+            const formHTML = `
+                <div id="syndicate-form">
+                    <div class="term-form-group">
+                        <span class="prompt">user@ID:</span>
+                        <input type="text" id="tf-name" class="term-input" placeholder="Ваш позывной (Имя)..." autocomplete="off">
+                    </div>
+                    <div class="term-form-group">
+                        <span class="prompt">user@CONTACT:</span>
+                        <input type="text" id="tf-contact" class="term-input" placeholder="@telegram_username или телефон..." autocomplete="off">
+                    </div>
+                    <div class="term-form-group">
+                        <span class="prompt">user@TASK:</span>
+                        <input type="text" id="tf-task" class="term-input" placeholder="Опишите задачу в двух словах..." autocomplete="off">
+                    </div>
+                    <div class="line" style="margin-top:15px;">
+                        <span class="prompt">~</span>
+                        <button class="form-btn" onclick="submitTerminalForm()">Execute / Отправить протокол</button>
+                    </div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                printHTML(formHTML);
+                scrollToBottom();
+                document.getElementById('tf-name').focus();
+            }, 800);
+        }
+
+        function submitTerminalForm() {
+            const name = document.getElementById('tf-name').value;
+            const contact = document.getElementById('tf-contact').value;
+            
+            if(!name || !contact) {
+                printHTML(`<div class="line warning">> [ОШИБКА] Отсутствуют данные аутентификации (Имя или Контакт).</div>`);
+                scrollToBottom();
+                return;
+            }
+
+            // Имитация отправки
+            document.getElementById('syndicate-form').style.display = 'none';
+            statusText.innerText = "Передача пакетов...";
+            
+            setTimeout(() => {
+                printHTML(`<div class="line"><span class="system" style="color:#27c93f;">> [УСПЕХ] Данные зашифрованы и переданы. Инженеры Синдиката свяжутся с вами в ближайшее время.</span></div>`);
+                printHTML(`<div class="line"><span class="prompt">~</span><span class="cursor"></span></div>`);
+                statusText.innerText = "Связь разорвана. Канал закрыт.";
+                scrollToBottom();
+                
+                // Здесь будет твой реальный fetch/ajax на сервер Google Apps Script
+                // fetch('ТВОЙ_URL', { method: 'POST', body: ... })
+            }, 1200);
+        }
+
+        function typeLine(step) {
+            return new Promise(resolve => {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'line';
+                
+                if (step.type === 'system' || step.type === 'warning') {
+                    const colorClass = step.type === 'warning' ? 'warning' : 'system';
+                    lineDiv.innerHTML = `<span class="${colorClass}">[sys] ${step.text}</span>`;
+                    termBody.appendChild(lineDiv);
+                    setTimeout(resolve, step.delay);
+                } 
+                else if (step.type === 'command') {
+                    lineDiv.innerHTML = `<span class="prompt">~</span><span class="command" onclick="copyToClipboard('${step.text}')" title="${step.tooltip}">${step.text}</span>`;
+                    termBody.appendChild(lineDiv);
+                    setTimeout(resolve, step.delay);
+                }
+                else if (step.type === 'highlight') {
+                    lineDiv.innerHTML = `<span class="highlight">> ${step.text}</span>`;
+                    termBody.appendChild(lineDiv);
+                    setTimeout(resolve, step.delay);
+                }
+                else {
+                    lineDiv.innerHTML = `<span class="prompt">~</span><span class="typing"></span>`;
+                    termBody.appendChild(lineDiv);
+                    const textSpan = lineDiv.querySelector('.typing');
+                    
+                    if(step.text.includes('<span') || step.text.includes('<svg')) {
+                        textSpan.innerHTML = step.text;
+                        setTimeout(resolve, step.delay);
+                    } else {
+                        let i = 0;
+                        const interval = setInterval(() => {
+                            textSpan.textContent += step.text.charAt(i);
+                            i++;
+                            scrollToBottom();
+                            if (i >= step.text.length) {
+                                clearInterval(interval);
+                                setTimeout(resolve, step.delay);
+                            }
+                        }, 20);
+                    }
+                }
+            });
+        }
+
+        function printHTML(html) {
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            termBody.appendChild(div.firstElementChild);
+        }
+
+        function scrollToBottom() {
+            termBody.scrollTop = termBody.scrollHeight;
+        }
+
+        window.copyToClipboard = function(text) {
+            if(text.includes('1234567890:')) {
+                printHTML(`<div class="line warning">[ОШИБКА] Это пример. Скопируйте свой настоящий токен из Telegram.</div>`);
+                scrollToBottom();
+                return;
+            }
+            if(text === 'my_syndicate_bot') {
+                printHTML(`<div class="line warning">[ИНФО] Придумайте свой уникальный юзернейм.</div>`);
+                scrollToBottom();
+                return;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                printHTML(`<div class="line"><span class="system" style="color: #27c93f;">[ok] Команда ${text} скопирована.</span></div>`);
+                scrollToBottom();
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web-разработка & SPA Архитектура | METLA DIGITAL SYNDICATE</title>
+    
+    <!-- SEO База -->
+    <meta name="description" content="Разработка сверхбыстрых веб-приложений (SPA) и сложных корпоративных сайтов. Убийственная конверсия за счет мгновенной скорости загрузки.">
+    <meta name="keywords" content="разработка сайтов, web разработка, создание spa, react разработка, metla digital syndicate, сайты под ключ">
+    <meta name="author" content="METLA DIGITAL SYNDICATE">
+    <link rel="canonical" href="https://redmetla.github.io/RedMet/web_development.html" />
+
+    <!-- Open Graph / Соцсети -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Web-архитектура будущего | METLA">
+    <meta property="og:description" content="Создаем Single Page Applications, которые работают быстрее мыслей ваших клиентов.">
+    <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
+
+    <!-- SEO Микроразметка (Service) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Web Development",
+      "provider": {
+        "@type": "Organization",
+        "name": "METLA DIGITAL SYNDICATE"
+      },
+      "description": "Разработка высоконагруженных веб-приложений (SPA) и интерактивных интерфейсов с мгновенным откликом.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "RUB",
+          "price": "Зависит от проекта"
+        }
+      }
+    }
+    </script>
+
+    <style>
+        /* БАЗОВЫЕ ПЕРЕМЕННЫЕ */
+        :root {
+            --bg-dark: #020610; 
+            --teal-main: #00f3ff;
+            --teal-glow: rgba(0, 243, 255, 0.6);
+            --emerald-main: #00ffa3;
+            --emerald-glow: rgba(0, 255, 163, 0.4);
+            --glass-bg: rgba(20, 25, 40, 0.4);
+            --glass-border: rgba(0, 243, 255, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-dark); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+        }
+
+        /* КАНВАС: ПОТОК ДАННЫХ */
+        #data-stream { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .bg-vignette { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 40%, transparent 0%, var(--bg-dark) 100%); z-index: 1; pointer-events: none; }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .presentation-wrapper {
+            position: relative; z-index: 5; display: flex; align-items: center; justify-content: center;
+            gap: 50px; max-width: 1400px; padding: 60px 20px; width: 100%; min-height: 100vh; box-sizing: border-box;
+        }
+
+        /* ТЕКСТОВЫЙ БЛОК */
+        .promo-text { flex: 1; max-width: 700px; perspective: 1000px; }
+        
+        /* Заголовок строго горизонтально */
+        .promo-text h1 {
+            font-size: clamp(2.2rem, 4vw, 4rem); 
+            font-weight: 900; margin-bottom: 20px;
+            line-height: 1.1; text-transform: uppercase; letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--teal-main) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            transform: none; /* Строго ровно */
+            text-shadow: 
+                0px 2px 0px #008899, 0px 4px 0px #005566,
+                0px 15px 20px rgba(0, 243, 255, 0.4), 0px 30px 40px rgba(0, 0, 0, 0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .promo-text p {
+            font-size: 1.15rem; color: #a1b2cc; line-height: 1.6; margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+        .tag {
+            background: rgba(0, 243, 255, 0.05); backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 243, 255, 0.3); padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 800; color: var(--teal-main); text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* ИНТЕРАКТИВНЫЙ БРАУЗЕР (GLASSMORPHISM) */
+        .browser-mockup {
+            width: 550px; height: 620px; flex-shrink: 0;
+            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-radius: 20px; border: 1px solid var(--glass-border);
+            box-shadow: 
+                inset 0 0 10px rgba(255,255,255,0.05),
+                0 30px 60px rgba(0,0,0,0.8), 
+                0 0 80px rgba(0, 243, 255, 0.15);
+            display: flex; flex-direction: column; overflow: hidden;
+            transform: translateY(0) rotateY(-5deg); animation: floatBrowser 7s ease-in-out infinite;
+            will-change: transform; position: relative;
+        }
+
+        @keyframes floatBrowser {
+            0% { transform: translateY(0px) rotateY(-5deg); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 243, 255, 0.15); }
+            50% { transform: translateY(-20px) rotateY(-2deg); box-shadow: 0 50px 80px rgba(0,0,0,0.9), 0 0 100px rgba(0, 243, 255, 0.25); }
+            100% { transform: translateY(0px) rotateY(-5deg); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 243, 255, 0.15); }
+        }
+
+        /* Шапка браузера */
+        .browser-header {
+            background: rgba(0,0,0,0.4); border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 12px 15px; display: flex; align-items: center; gap: 15px;
+        }
+        .browser-dots { display: flex; gap: 6px; }
+        .b-dot { width: 12px; height: 12px; border-radius: 50%; background: #444;}
+        .b-dot:nth-child(1) { background: #ff5f56; } .b-dot:nth-child(2) { background: #ffbd2e; } .b-dot:nth-child(3) { background: #27c93f; }
+        
+        .browser-url {
+            flex: 1; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 6px 12px;
+            font-family: monospace; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;
+        }
+        .lock-icon { font-size: 0.8rem; color: var(--emerald-main); }
+
+        /* Тело браузера */
+        .browser-body { flex: 1; display: flex; position: relative; overflow: hidden; }
+
+        /* Боковое меню */
+        .browser-sidebar {
+            width: 140px; background: rgba(0,0,0,0.2); border-right: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 10px; display: flex; flex-direction: column; gap: 10px; z-index: 10;
+        }
+        .nav-item {
+            padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: #a1b2cc;
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .nav-item:hover { background: rgba(0, 243, 255, 0.1); color: #fff; }
+        .nav-item.active { background: var(--teal-main); color: #000; box-shadow: 0 0 15px var(--teal-glow); }
+
+        /* Контентная часть */
+        .browser-content-area { flex: 1; position: relative; overflow: hidden; background: transparent; }
+        
+        .page-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 30px; box-sizing: border-box; display: flex; flex-direction: column;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s ease;
+            overflow-y: auto;
+        }
+        
+        .page-content.active { opacity: 1; pointer-events: auto; transform: translateY(0); z-index: 2; }
+        .page-content.entering { transform: translateY(20px); }
+
+        /* === НАПОЛНЕНИЕ СТРАНИЦ (MOCK CONTENT) === */
+        .mock-h2 { font-size: 1.8rem; font-weight: 800; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .mock-p { color: #a1b2cc; line-height: 1.5; font-size: 0.95rem; margin: 0 0 20px 0; }
+        
+        .mock-cards-row { display: flex; gap: 15px; margin-top: 10px; }
+        .mock-card {
+            flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 15px; text-align: center; font-weight: bold; color: #fff;
+        }
+        
+        .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .mock-grid-item { height: 90px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; justify-content: center; align-items: center; color: rgba(255,255,255,0.3); font-size: 2rem; }
+
+        .mock-input {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 15px; border-radius: 8px; color: #fff; margin-bottom: 15px; box-sizing: border-box;
+            outline: none; font-family: inherit;
+        }
+        .mock-btn {
+            background: #ff4b72; color: #fff; border: none; padding: 12px; border-radius: 8px;
+            font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; transition: 0.2s;
+        }
+        .mock-btn:hover { background: #ff2a55; box-shadow: 0 0 15px rgba(255,75,114,0.5); }
+        .mock-btn.emerald { background: var(--emerald-main); color: #000;}
+        .mock-btn.emerald:hover { background: #00cc88; box-shadow: 0 0 15px var(--emerald-glow); }
+        
+        /* Интерактивный Виджет (Кнопка Лайка) */
+        .interactive-widget {
+            width: 100%; height: 100px; background: linear-gradient(135deg, rgba(0,243,255,0.1), rgba(0,255,163,0.1));
+            border: 1px dashed rgba(0,243,255,0.3); border-radius: 12px; margin-top: auto;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.2s; user-select: none;
+        }
+        .interactive-widget:hover { background: rgba(0,243,255,0.2); border-color: var(--teal-main); }
+        .interactive-widget:active { transform: scale(0.95); }
+        .widget-icon { font-size: 2rem; margin-bottom: 5px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .widget-icon.liked { color: #ff4b72; text-shadow: 0 0 15px rgba(255,75,114,0.6); transform: scale(1.2); }
+        .widget-text { font-weight: bold; color: var(--teal-main); font-size: 0.9rem; }
+
+        /* ИМИТАЦИЯ ЗАГРУЗКИ (LEGACY) */
+        .hard-reload-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; z-index: 100; display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .hard-reload-overlay.active { display: flex; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--bg-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;}
+        .loading-text { color: #666; font-family: sans-serif; font-size: 0.9rem;}
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
+        .control-panel {
+            margin-top: 10px; background: rgba(0,0,0,0.6); padding: 15px 25px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+        
+        .mode-label { font-size: 0.9rem; font-weight: 600; color: #a1b2cc; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
+        .mode-label.active-legacy { color: #ff5f56; text-shadow: 0 0 10px rgba(255,95,86,0.5); }
+        .mode-label.active-spa { color: var(--emerald-main); text-shadow: 0 0 10px var(--emerald-glow); }
+
+        .switch { position: relative; display: inline-block; width: 60px; height: 30px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ff5f56; transition: .4s; border-radius: 30px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        input:checked + .slider { background-color: var(--emerald-main); box-shadow: 0 0 15px var(--emerald-glow); }
+        input:checked + .slider:before { transform: translateX(30px); }
+
+        .metrics { margin-top: 15px; display: flex; gap: 15px; justify-content: space-between; width: 100%;}
+        .metric-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; text-align: center; flex: 1;}
+        .m-val { font-size: 1.3rem; font-weight: 900; color: #fff; font-family: monospace;}
+        .m-lbl { font-size: 0.65rem; color: #8b9bb4; text-transform: uppercase; letter-spacing: 1px;}
+        .m-val.bad { color: #ff5f56; } .m-val.good { color: var(--emerald-main); }
+
+        /* МОНИТОР СЕТЕВОЙ АКТИВНОСТИ */
+        .network-logger {
+            margin-top: 15px; width: 100%; background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            padding: 12px; box-sizing: border-box; backdrop-filter: blur(5px);
+        }
+        .log-header { font-size: 0.7rem; color: #8b9bb4; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between;}
+        .log-header span.pulse { color: var(--teal-main); animation: pulse 1.5s infinite; }
+        .log-body { height: 90px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; font-family: monospace; font-size: 0.8rem; }
+        .log-body::-webkit-scrollbar { width: 4px; } .log-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+        .log-line { opacity: 0; animation: fadeInLog 0.3s forwards; }
+        .log-line.legacy { color: #ff5f56; }
+        .log-line.spa { color: var(--emerald-main); }
+        .log-line.neutral { color: #a1b2cc; }
+
+        @keyframes fadeInLog { to { opacity: 1; transform: translateX(0); } from { opacity: 0; transform: translateX(-10px); } }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+        /* АДАПТИВ */
+        @media (max-width: 1000px) {
+            .presentation-wrapper { flex-direction: column; text-align: center; padding: 40px 15px; gap: 40px; }
+            .promo-text { perspective: none; }
+            .promo-text h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); transform: none; text-shadow: 0 5px 15px rgba(0,0,0,0.5); white-space: normal; } 
+            .tag-container { justify-content: center; }
+            
+            .browser-mockup {
+                width: 100%; max-width: 500px; height: 550px;
+                animation: none !important; transform: none !important;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .browser-sidebar { width: 60px; padding: 20px 5px; }
+            .nav-item span { display: none; }
+            .nav-item { justify-content: center; font-size: 1.2rem; }
+            .page-content { padding: 20px 15px; }
+            .mock-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Живой фон потока данных (Управляется тумблером) -->
+    <canvas id="data-stream"></canvas>
+    <div class="bg-vignette"></div>
+
+    <main class="presentation-wrapper">
+        
+        <!-- Описание и Панель Управления -->
+        <div class="promo-text">
+            <h1>Архитектура<br>Будущего</h1>
+            <p>Забудьте о белых экранах и долгих загрузках. Мы разрабатываем <b>Single Page Applications (SPA)</b> — сайты, которые работают как единый живой организм. Проверьте разницу сами:</p>
+            
+            <div class="tag-container">
+                <div class="tag">#ReactJS</div>
+                <div class="tag">#Zero_Reload</div>
+                <div class="tag">#Instant_UX</div>
+            </div>
+
+            <!-- Тумблер управления симулятором -->
+            <div class="control-panel">
+                <span class="mode-label active-legacy" id="lbl-legacy">Legacy (Старый сайт)</span>
+                <label class="switch">
+                    <input type="checkbox" id="mode-toggle" onchange="toggleMode()">
+                    <span class="slider"></span>
+                </label>
+                <span class="mode-label" id="lbl-spa">SPA (Синдикат)</span>
+            </div>
+
+            <div class="metrics">
+                <div class="metric-box">
+                    <div class="m-val bad" id="m-time">1.2s</div>
+                    <div class="m-lbl">Время отклика</div>
+                </div>
+                <div class="metric-box">
+                    <div class="m-val bad" id="m-reload">ДА</div>
+                    <div class="m-lbl">Перезагрузка DOM</div>
+                </div>
+            </div>
+
+            <!-- Интерактивный Сетевой Логгер -->
+            <div class="network-logger">
+                <div class="log-header">
+                    <span>Network Inspector</span>
+                    <span class="pulse" id="pulse-indicator">● Standby</span>
+                </div>
+                <div class="log-body" id="log-body">
+                    <div class="log-line neutral">> Система в состоянии покоя. Поток данных заморожен.</div>
+                    <div class="log-line neutral">> Переключите режим на SPA, чтобы разблокировать скорость.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Интерактивный Симулятор Браузера -->
+        <div class="browser-mockup">
+            <!-- Шапка -->
+            <div class="browser-header">
+                <div class="browser-dots">
+                    <div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div>
+                </div>
+                <div class="browser-url">
+                    <span class="lock-icon">🔒</span> <span id="url-text">metla.digital/home</span>
+                </div>
+            </div>
+
+            <!-- Тело -->
+            <div class="browser-body">
+                
+                <!-- Меню -->
+                <div class="browser-sidebar">
+                    <div class="nav-item active" onclick="navigate('home', this)">🏠 <span>Главная</span></div>
+                    <div class="nav-item" onclick="navigate('services', this)">⚡ <span>Услуги</span></div>
+                    <div class="nav-item" onclick="navigate('portfolio', this)">📂 <span>Проекты</span></div>
+                    <div class="nav-item" onclick="navigate('contact', this)">💬 <span>Связь</span></div>
+                </div>
+
+                <!-- Контент (Страницы) -->
+                <div class="browser-content-area">
+                    
+                    <!-- Экран жесткой загрузки (только для Legacy) -->
+                    <div class="hard-reload-overlay" id="hard-reload">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Ожидание ответа сервера...</div>
+                    </div>
+
+                    <!-- СТРАНИЦА 1: ГЛАВНАЯ -->
+                    <div class="page-content active" id="page-home">
+                        <h2 class="mock-h2" style="color: var(--teal-main);" id="h2-home">СИНДИКАТ ИНТЕРФЕЙСОВ</h2>
+                        <p class="mock-p">Мы не создаем просто страницы в интернете. Мы строим цифровые платформы, работающие без перезагрузок и задержек, сохраняя внимание клиента.</p>
+                        
+                        <!-- Виджет оценки -->
+                        <div class="interactive-widget" onclick="handleLike()">
+                            <div class="widget-icon" id="widget-icon">🤍</div>
+                            <div class="widget-text">Оценить проект (<span id="like-count">0</span>)</div>
+                        </div>
+                    </div>
+
+                    <!-- СТРАНИЦА 2: УСЛУГИ -->
+                    <div class="page-content" id="page-services">
+                        <h2 class="mock-h2" style="color: var(--emerald-main);" id="h2-serv">НАШИ УСЛУГИ</h2>
+                        <p class="mock-p">Комплексная веб-разработка с использованием современного технологического стека.</p>
+                        <div class="mock-cards-row">
+                            <div class="mock-card">⚛️ React / Vue SPA</div>
+                            <div class="mock-card">⚙️ Node.js Backend</div>
+                        </div>
+                        <div class="mock-cards-row">
+                            <div class="mock-card">☁️ Cloud Deploy</div>
+                            <div class="mock-card">🎨 UI/UX Design</div>
+                        </div>
+                    </div>
+
+                    <!-- СТРАНИЦА 3: ПРОЕКТЫ -->
+                    <div class="page-content" id="page-portfolio">
+                        <h2 class="mock-h2" style="color: #a1b2cc;">АРХИВ ПРОЕКТОВ</h2>
+                        <p class="mock-p">Примеры высоконагруженных систем.</p>
+                        <div class="mock-grid">
+                            <div class="mock-grid-item">🌐</div>
+                            <div class="mock-grid-item">📊</div>
+                            <div class="mock-grid-item">🛒</div>
+                            <div class="mock-grid-item">📱</div>
+                        </div>
+                    </div>
+
+                    <!-- СТРАНИЦА 4: СВЯЗЬ -->
+                    <div class="page-content" id="page-contact">
+                        <h2 class="mock-h2" style="color: #ff4b72;">УСТАНОВИТЬ СВЯЗЬ</h2>
+                        <p class="mock-p">Оставьте ваши данные, и инженеры Синдиката свяжутся с вами.</p>
+                        <input type="text" class="mock-input" value="" placeholder="Ваш позывной / Имя" readonly>
+                        <input type="text" class="mock-input" value="" placeholder="Суть задачи" readonly>
+                        <button class="mock-btn" id="mock-form-btn" onclick="handleFormSubmit()">Отправить запрос</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- 1. АНИМАЦИЯ ФОНА (УПРАВЛЯЕМАЯ ФИЗИКА) ---
+        const canvas = document.getElementById('data-stream');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        // Глобальная переменная скорости (0 - стоп, 1 - летит)
+        let targetFlowSpeed = 0; 
+        let currentFlowSpeed = 0;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const pCount = window.innerWidth < 768 ? 40 : 100;
+        for(let i=0; i<pCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                length: Math.random() * 20 + 10,
+                baseSpeed: Math.random() * 3 + 1,
+                opacity: Math.random() * 0.5 + 0.1,
+                color: Math.random() > 0.5 ? '#00f3ff' : '#00ffa3'
+            });
+        }
+
+        function drawStream() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Плавное ускорение/замедление фона
+            currentFlowSpeed += (targetFlowSpeed - currentFlowSpeed) * 0.05;
+
+            particles.forEach(p => {
+                // Движение зависит от текущей скорости
+                p.y -= p.baseSpeed * currentFlowSpeed; 
+                
+                if (p.y + p.length < 0) {
+                    p.y = height + p.length;
+                    p.x = Math.random() * width;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p.x, p.y + p.length);
+                ctx.strokeStyle = p.color;
+                // Легкое мерцание, если поток стоит
+                ctx.globalAlpha = currentFlowSpeed < 0.1 ? p.opacity * (0.5 + Math.sin(Date.now() / 500 + p.x) * 0.2) : p.opacity;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+            });
+            requestAnimationFrame(drawStream);
+        }
+        drawStream();
+
+        // --- 2. ЛОГИКА СИМУЛЯТОРА И СЕТЕВОГО ЛОГГЕРА ---
+        let isSPA = false;
+        let currentPage = 'home';
+        let isNavigating = false;
+        let likes = 0;
+
+        const toggleBtn = document.getElementById('mode-toggle');
+        const lblLegacy = document.getElementById('lbl-legacy');
+        const lblSpa = document.getElementById('lbl-spa');
+        const mTime = document.getElementById('m-time');
+        const mReload = document.getElementById('m-reload');
+        const urlText = document.getElementById('url-text');
+        const logBody = document.getElementById('log-body');
+        const pulseIndicator = document.getElementById('pulse-indicator');
+
+        function addLog(message, type) {
+            const line = document.createElement('div');
+            line.className = `log-line ${type}`;
+            const time = new Date().toLocaleTimeString().split(' ')[0];
+            line.innerText = `[${time}] ${message}`;
+            logBody.appendChild(line);
+            logBody.scrollTop = logBody.scrollHeight;
+        }
+
+        function toggleMode() {
+            isSPA = toggleBtn.checked;
+            
+            if (isSPA) {
+                // SPA ВКЛЮЧЕН: Активируем полет фона
+                targetFlowSpeed = 1;
+                pulseIndicator.innerText = "● Live SPA";
+                pulseIndicator.style.color = "var(--emerald-main)";
+
+                lblLegacy.classList.remove('active-legacy');
+                lblSpa.classList.add('active-spa');
+                mTime.innerText = "0.01s"; mTime.className = "m-val good";
+                mReload.innerText = "НЕТ"; mReload.className = "m-val good";
+                
+                document.querySelector('.browser-mockup').style.boxShadow = "inset 0 0 10px rgba(255,255,255,0.05), 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 255, 163, 0.15)";
+                document.querySelector('.browser-mockup').style.borderColor = "rgba(0, 255, 163, 0.2)";
+                
+                // Смена стилей элементов внутри мокапа
+                document.getElementById('h2-home').style.color = "var(--emerald-main)";
+                document.getElementById('mock-form-btn').classList.add('emerald');
+
+                if (navigator.vibrate) navigator.vibrate(50);
+                addLog('Система переведена на React/Next.js SPA. Поток данных разблокирован.', 'spa');
+            } else {
+                // SPA ВЫКЛЮЧЕН: Останавливаем фон
+                targetFlowSpeed = 0;
+                pulseIndicator.innerText = "● Standby";
+                pulseIndicator.style.color = "var(--teal-main)";
+
+                lblSpa.classList.remove('active-spa');
+                lblLegacy.classList.add('active-legacy');
+                mTime.innerText = "1.2s"; mTime.className = "m-val bad";
+                mReload.innerText = "ДА"; mReload.className = "m-val bad";
+                
+                document.querySelector('.browser-mockup').style.boxShadow = "inset 0 0 10px rgba(255,255,255,0.05), 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 243, 255, 0.15)";
+                document.querySelector('.browser-mockup').style.borderColor = "rgba(0, 243, 255, 0.2)";
+                
+                document.getElementById('h2-home').style.color = "var(--teal-main)";
+                document.getElementById('mock-form-btn').classList.remove('emerald');
+
+                addLog('Возврат к устаревшей архитектуре. Поток заморожен.', 'legacy');
+            }
+        }
+
+        // Интерактивная кнопка "Лайк"
+        window.handleLike = function() {
+            if (isNavigating) return;
+
+            const icon = document.getElementById('widget-icon');
+            const countEl = document.getElementById('like-count');
+
+            if (!isSPA) {
+                isNavigating = true;
+                const hardReload = document.getElementById('hard-reload');
+                document.getElementById(`page-${currentPage}`).classList.remove('active');
+                hardReload.classList.add('active');
+                
+                addLog('POST /action/like -> Ожидание ответа сервера', 'legacy');
+                
+                setTimeout(() => {
+                    likes++; countEl.innerText = likes;
+                    icon.innerHTML = "❤️"; icon.classList.add('liked');
+                    
+                    hardReload.classList.remove('active');
+                    document.getElementById(`page-${currentPage}`).classList.add('active');
+                    isNavigating = false;
+                    
+                    addLog('GET /home.html -> Перерисовка всего DOM (1.4s)', 'legacy');
+                }, 1400);
+
+            } else {
+                likes++; countEl.innerText = likes;
+                icon.innerHTML = "❤️"; icon.classList.add('liked');
+                
+                icon.style.transform = 'scale(1.3)';
+                setTimeout(() => icon.style.transform = 'scale(1)', 150);
+                if (navigator.vibrate) navigator.vibrate(20);
+
+                addLog('PATCH /api/v1/likes -> JSON Обновлен (12ms)', 'spa');
+            }
+        }
+
+        // Имитация отправки формы контакта
+        window.handleFormSubmit = function() {
+            if (isNavigating) return;
+            const btn = document.getElementById('mock-form-btn');
+            
+            if (!isSPA) {
+                isNavigating = true;
+                const hardReload = document.getElementById('hard-reload');
+                document.getElementById(`page-${currentPage}`).classList.remove('active');
+                hardReload.classList.add('active');
+                
+                addLog('POST /form/submit -> Страница зависла...', 'legacy');
+                
+                setTimeout(() => {
+                    hardReload.classList.remove('active');
+                    document.getElementById(`page-${currentPage}`).classList.add('active');
+                    btn.innerText = "ОТПРАВЛЕНО";
+                    isNavigating = false;
+                    addLog('Ответ получен. Полная перезагрузка (1.8s)', 'legacy');
+                    setTimeout(() => btn.innerText = "Отправить запрос", 2000);
+                }, 1800);
+            } else {
+                btn.innerText = "ОТПРАВКА...";
+                addLog('POST /api/contact -> Данные улетели', 'spa');
+                setTimeout(() => {
+                    btn.innerText = "✓ УСПЕШНО";
+                    addLog('Ответ API 200 OK. Интерфейс не блокировался (45ms)', 'spa');
+                    if (navigator.vibrate) navigator.vibrate(30);
+                    setTimeout(() => btn.innerText = "Отправить запрос", 2000);
+                }, 400);
+            }
+        }
+
+        // Навигация
+        window.navigate = function(pageId, btnElement) {
+            if (isNavigating || currentPage === pageId) return;
+            isNavigating = true;
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const newPage = document.getElementById(`page-${pageId}`);
+            const oldPage = document.getElementById(`page-${currentPage}`);
+            
+            if (!isSPA) {
+                const hardReload = document.getElementById('hard-reload');
+                oldPage.classList.remove('active');
+                hardReload.classList.add('active');
+                urlText.innerText = "Загрузка...";
+                
+                addLog(`GET /${pageId}.html -> Ожидание HTML документа...`, 'legacy');
+                if (navigator.vibrate) navigator.vibrate(20);
+
+                setTimeout(() => {
+                    hardReload.classList.remove('active');
+                    newPage.classList.add('active');
+                    urlText.innerText = `metla.digital/${pageId}`;
+                    currentPage = pageId;
+                    isNavigating = false;
+                    addLog(`Успешно. DOM перестроен (1.2s)`, 'legacy');
+                }, 1200);
+
+            } else {
+                oldPage.classList.remove('active');
+                newPage.classList.add('entering');
+                
+                addLog(`FETCH /api/${pageId} -> JSON получен (8ms)`, 'spa');
+
+                requestAnimationFrame(() => {
+                    newPage.classList.remove('entering');
+                    newPage.classList.add('active');
+                    urlText.innerText = `metla.digital/${pageId}`;
+                    currentPage = pageId;
+                    isNavigating = false;
+                    if (navigator.vibrate) navigator.vibrate(10);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

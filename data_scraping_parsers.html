@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Data Scraping & Разработка Парсеров | METLA DIGITAL SYNDICATE</title>
+    
+    <!-- SEO База -->
+    <meta name="description" content="Разработка парсеров любой сложности. Автоматический сбор данных, мониторинг цен конкурентов, граббинг сайтов. Превращаем хаос интернета в ваши структурированные базы.">
+    <meta name="keywords" content="data scraping, парсинг данных, разработка парсеров, сбор данных с сайтов, парсер на python, metla digital syndicate">
+    <meta name="author" content="METLA DIGITAL SYNDICATE">
+    <link rel="canonical" href="https://redmetla.github.io/RedMet/data_scraping.html" />
+
+    <!-- Open Graph / Соцсети -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Data Scraping | Извлечение любой информации">
+    <meta property="og:description" content="Парсеры от Синдиката. Собираем данные конкурентов, формируем базы, автоматизируем рутину.">
+    <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
+
+    <!-- SEO Микроразметка (Service) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Data Scraping & Web Parsing",
+      "provider": {
+        "@type": "Organization",
+        "name": "METLA DIGITAL SYNDICATE"
+      },
+      "description": "Разработка скриптов для автоматического извлечения данных с любых веб-ресурсов, обход защит, API интеграции.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "RUB",
+          "price": "Индивидуальный расчет"
+        }
+      }
+    }
+    </script>
+
+    <!-- Яндекс.Метрика (Готов к работе) -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(99999999, "init", { /* ВАШ СЧЕТЧИК */
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99999999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <style>
+        /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Кибер-Матрица & Золото) */
+        :root {
+            --bg-obsidian: #050507;
+            --neon-green: #00ffa3;
+            --green-glow: rgba(0, 255, 163, 0.5);
+            --cyber-amber: #ffb000;
+            --amber-glow: rgba(255, 176, 0, 0.4);
+            --glass-panel: rgba(15, 15, 20, 0.6);
+            --glass-border: rgba(0, 255, 163, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-obsidian); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+        }
+
+        /* КАНВАС: РАДАР И УЗЛЫ ДАННЫХ */
+        #radar-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .vignette { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, transparent 0%, var(--bg-obsidian) 90%); z-index: 1; pointer-events: none; }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .presentation-wrapper {
+            position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center;
+            width: 100%; max-width: 1400px; padding: 60px 20px; box-sizing: border-box; min-height: 100vh;
+        }
+
+        /* ТЕКСТОВЫЙ БЛОК */
+        .promo-header { text-align: center; max-width: 900px; margin-bottom: 50px; }
+        .promo-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; margin-bottom: 20px;
+            line-height: 1.1; text-transform: uppercase; letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--neon-green) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 255, 163, 0.3);
+        }
+        .promo-header p { font-size: 1.2rem; color: #a1b2cc; line-height: 1.6; margin-bottom: 30px; }
+
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .tag {
+            background: rgba(0, 255, 163, 0.05); backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 163, 0.3); padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 800; color: var(--neon-green); text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ ПАРСИНГА */
+        .scraper-terminal {
+            width: 100%; max-width: 1100px; 
+            background: var(--glass-panel); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px; border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 20px rgba(0,255,163,0.05), 0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(0, 255, 163, 0.1);
+            display: flex; flex-direction: column; overflow: hidden; position: relative;
+        }
+
+        /* Панель управления (URL, Настройки и Кнопка) */
+        .term-control {
+            background: rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 20px; display: flex; flex-direction: column; gap: 15px;
+        }
+        
+        .term-row { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; width: 100%; }
+        
+        .url-input-wrapper {
+            flex: 1; min-width: 250px; background: #000; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; display: flex; align-items: center; padding: 0 15px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); cursor: pointer; transition: 0.2s;
+        }
+        .url-input-wrapper:hover { border-color: rgba(0, 255, 163, 0.4); }
+        .url-icon { color: var(--text-muted); font-size: 1.2rem; }
+        .url-input {
+            width: 100%; background: transparent; border: none; padding: 15px 10px;
+            color: var(--neon-green); font-family: monospace; font-size: 1rem; outline: none; cursor: pointer;
+        }
+
+        .btn-parse {
+            background: rgba(0, 255, 163, 0.1); color: var(--neon-green);
+            border: 1px solid var(--neon-green); padding: 15px 30px; border-radius: 12px;
+            font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 10px; justify-content: center;
+        }
+        .btn-parse:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 25px var(--green-glow); }
+        .btn-parse.active { background: var(--neon-green); color: #000; animation: pulse 1s infinite; pointer-events: none; }
+
+        /* ИНТЕРАКТИВНЫЕ ЧЕКБОКСЫ НАСТРОЕК */
+        .settings-bar { display: flex; gap: 20px; flex-wrap: wrap; padding-left: 5px; }
+        .cyber-check { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #a1b2cc; cursor: pointer; user-select: none; transition: 0.2s; }
+        .cyber-check:hover { color: #fff; }
+        .cyber-check input { display: none; }
+        .cyber-check .box { width: 18px; height: 18px; border: 1px solid var(--neon-green); border-radius: 4px; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); transition: 0.2s;}
+        .cyber-check input:checked + .box { background: rgba(0, 255, 163, 0.1); }
+        .cyber-check input:checked + .box::after { content: ''; width: 10px; height: 10px; background: var(--neon-green); border-radius: 2px; box-shadow: 0 0 8px var(--neon-green); }
+
+        /* Зона симуляции (Сайт Конкурента VS База Данных) */
+        .simulation-area { display: flex; height: 500px; position: relative; }
+        .panel { flex: 1; padding: 25px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .panel-donor { border-right: 1px dashed rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); }
+        .panel-db { background: rgba(0, 0, 0, 0.2); }
+
+        .panel-title {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 800; margin-bottom: 20px; color: var(--text-muted); display: flex; align-items: center; gap: 10px;
+        }
+        .panel-title.db span { color: var(--cyber-amber); }
+
+        /* Имитация сайта донора */
+        .mock-site {
+            background: #fff; border-radius: 8px; flex: 1; padding: 20px;
+            position: relative; overflow-y: hidden; /* Скрываем скролл, управляем через JS */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); scroll-behavior: smooth;
+        }
+        .mock-header { width: 100%; height: 40px; background: #f0f0f0; border-radius: 6px; margin-bottom: 20px; display: flex; align-items: center; padding: 0 15px; box-sizing: border-box; gap: 10px;}
+        .mock-logo { width: 30px; height: 30px; background: #ccc; border-radius: 4px; }
+        .mock-nav { flex: 1; height: 10px; background: #e0e0e0; border-radius: 4px; }
+        
+        .mock-product { display: flex; gap: 15px; margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px; position: relative; transition: 0.3s; }
+        .mock-product.parsed { opacity: 0.5; border-color: rgba(0,255,163,0.5); background: rgba(0,255,163,0.05); }
+        .mock-img { width: 80px; height: 80px; background: #e0e0e0; border-radius: 6px; flex-shrink: 0;}
+        .mock-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .m-title { width: 80%; height: 14px; background: #333; border-radius: 4px; }
+        .m-desc { width: 100%; height: 8px; background: #ccc; border-radius: 4px; }
+        .m-price { width: 40%; height: 18px; background: #ff4b72; border-radius: 4px; }
+
+        /* ЭФФЕКТ СКАНИРОВАНИЯ (ЛАЗЕР) */
+        .scanner-laser {
+            position: absolute; top: -100px; left: 0; width: 100%; height: 150px;
+            background: linear-gradient(to bottom, transparent, rgba(0,255,163,0.3) 95%, var(--neon-green) 100%);
+            border-bottom: 2px solid var(--neon-green); box-shadow: 0 10px 20px var(--green-glow);
+            z-index: 10; display: none; pointer-events: none;
+        }
+        .scanner-laser.active { display: block; animation: scanDown 2s linear infinite; }
+        @keyframes scanDown { 0% { top: -150px; } 100% { top: 100%; } }
+
+        /* Анимация перелетающих данных */
+        .flying-data {
+            position: absolute; background: rgba(0,0,0,0.9); border: 1px solid var(--neon-green);
+            color: var(--neon-green); padding: 6px 12px; border-radius: 6px; font-family: monospace; font-size: 0.85rem;
+            z-index: 100; opacity: 0; pointer-events: none; font-weight: bold; white-space: nowrap;
+            box-shadow: 0 0 15px var(--green-glow);
+        }
+        @keyframes flyToDB {
+            0% { transform: scale(1) translate(0, 0); opacity: 1; }
+            50% { transform: scale(1.2) translate(150px, -30px); opacity: 1; }
+            100% { transform: scale(0.5) translate(400px, 120px); opacity: 0; }
+        }
+
+        /* Имитация Базы Данных (JSON) */
+        .db-container {
+            background: #0a0a0f; border: 1px solid #1a1a24; border-radius: 8px; flex: 1;
+            padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem;
+            overflow-y: auto; color: #a1b2cc; position: relative; scroll-behavior: smooth;
+        }
+        .db-container::-webkit-scrollbar { width: 6px; }
+        .db-container::-webkit-scrollbar-thumb { background: rgba(255,176,0,0.3); border-radius: 3px; }
+        
+        .json-key { color: #ff5f56; }
+        .json-string { color: var(--neon-green); }
+        .json-number { color: var(--cyber-amber); }
+        .json-bracket { color: #8b9bb4; }
+
+        .db-line { opacity: 0; transform: translateX(-10px); animation: fadeInDb 0.3s forwards; margin-bottom: 4px; }
+        @keyframes fadeInDb { to { opacity: 1; transform: translateX(0); } }
+
+        /* КНОПКА ЭКСПОРТА (ПОЯВЛЯЕТСЯ В КОНЦЕ) */
+        .export-btn-container {
+            position: absolute; bottom: 20px; right: 20px; z-index: 10; display: none;
+            animation: fadeInDb 0.5s forwards;
+        }
+        .btn-export {
+            background: rgba(255, 176, 0, 0.15); color: var(--cyber-amber);
+            border: 1px solid var(--cyber-amber); padding: 10px 20px; border-radius: 8px;
+            font-family: monospace; font-weight: bold; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 0 15px var(--amber-glow); display: flex; align-items: center; gap: 8px;
+        }
+        .btn-export:hover { background: var(--cyber-amber); color: #000; box-shadow: 0 0 25px var(--cyber-amber); }
+
+        .status-badge {
+            position: absolute; top: 20px; right: 20px; background: rgba(255,176,0,0.1);
+            color: var(--cyber-amber); border: 1px solid var(--cyber-amber); padding: 4px 10px;
+            border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase;
+            box-shadow: 0 0 10px var(--amber-glow); display: none;
+        }
+        .status-badge.active { display: block; animation: pulseAmber 1s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+        @keyframes pulseAmber { 0% { box-shadow: 0 0 5px var(--amber-glow); } 50% { box-shadow: 0 0 15px var(--amber-glow); } 100% { box-shadow: 0 0 5px var(--amber-glow); } }
+
+        /* ИНФОРМАЦИОННЫЕ КАРТОЧКИ */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+            width: 100%; max-width: 1100px; margin-top: 80px; margin-bottom: 50px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px; border-radius: 16px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-5px); border-color: rgba(0, 255, 163, 0.3); background: rgba(0, 255, 163, 0.02);}
+        .f-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .f-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .f-desc { font-size: 0.95rem; color: #8b9bb4; line-height: 1.5; }
+
+        /* АДАПТИВ */
+        @media (max-width: 900px) {
+            .presentation-wrapper { padding: 40px 15px; }
+            .promo-header h1 { font-size: clamp(2rem, 6vw, 3rem); white-space: normal; }
+            .term-row { flex-direction: column; align-items: stretch; }
+            .btn-parse { justify-content: center; }
+            .settings-bar { justify-content: center; }
+            
+            .simulation-area { flex-direction: column; height: auto; }
+            .panel { height: 450px; }
+            .panel-donor { border-right: none; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+            
+            @keyframes flyToDB {
+                0% { transform: scale(1) translate(0, 0); opacity: 1; }
+                50% { transform: scale(1.2) translate(0, 100px); opacity: 1; }
+                100% { transform: scale(0.5) translate(0, 280px); opacity: 0; }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Живой фон (Радар/Сеть узлов) -->
+    <canvas id="radar-canvas"></canvas>
+    <div class="vignette"></div>
+
+    <main class="presentation-wrapper">
+        
+        <!-- Заголовок -->
+        <div class="promo-header">
+            <h1>Управление Информацией</h1>
+            <p>Ручной сбор данных — это ошибка. Мы разрабатываем <b>интеллектуальные парсеры</b>, которые обходят защиты, собирают терабайты данных с сайтов конкурентов и бережно складывают их в ваши базы и таблицы.</p>
+            
+            <div class="tag-container">
+                <div class="tag">#DataMining</div>
+                <div class="tag">#Автоматизация</div>
+                <div class="tag">#Python_Scraping</div>
+            </div>
+        </div>
+
+        <!-- ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ -->
+        <div class="scraper-terminal">
+            
+            <div class="term-control">
+                <div class="term-row">
+                    <div class="url-input-wrapper" onclick="cycleTargetUrl()" title="Кликните, чтобы сменить цель">
+                        <span class="url-icon">🌐</span>
+                        <input type="text" class="url-input" id="target-url" value="https://target-competitor.shop/catalog" readonly>
+                    </div>
+                    <button class="btn-parse" id="btn-start" onclick="startScraping()">
+                        <span>⚙️</span> Запустить Парсер
+                    </button>
+                </div>
+                
+                <!-- Новая панель настроек (Кликабельно) -->
+                <div class="settings-bar">
+                    <label class="cyber-check" onclick="vibrateLight()">
+                        <input type="checkbox" checked>
+                        <div class="box"></div> <span>Proxy Auto-Rotate</span>
+                    </label>
+                    <label class="cyber-check" onclick="vibrateLight()">
+                        <input type="checkbox" checked>
+                        <div class="box"></div> <span>Bypass Cloudflare</span>
+                    </label>
+                    <label class="cyber-check" onclick="vibrateLight()">
+                        <input type="checkbox">
+                        <div class="box"></div> <span>Headless Chrome (JS Render)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="simulation-area">
+                
+                <!-- Левая панель: Сайт-донор -->
+                <div class="panel panel-donor" id="donor-panel">
+                    <div class="panel-title"><span>📡</span> Сайт-Цель (Хаос)</div>
+                    
+                    <div class="mock-site" id="mock-site-scroll">
+                        <div class="scanner-laser" id="scanner"></div>
+                        
+                        <div class="mock-header">
+                            <div class="mock-logo"></div><div class="mock-nav"></div>
+                        </div>
+                        
+                        <!-- Товар 1 -->
+                        <div class="mock-product" id="prod-1">
+                            <div class="mock-img" style="background: #e0e0e0;"></div>
+                            <div class="mock-info">
+                                <div class="m-title" id="t-1" data-val="Сверхмощный Сервер X1"></div>
+                                <div class="m-desc"></div>
+                                <div class="m-price" id="p-1" data-val="145 000 ₽"></div>
+                            </div>
+                        </div>
+
+                        <!-- Товар 2 -->
+                        <div class="mock-product" id="prod-2">
+                            <div class="mock-img" style="background: #d0d0d0;"></div>
+                            <div class="mock-info">
+                                <div class="m-title" id="t-2" data-val="Кибер-Монитор 4K"></div>
+                                <div class="m-desc"></div>
+                                <div class="m-price" id="p-2" data-val="89 900 ₽"></div>
+                            </div>
+                        </div>
+
+                        <!-- Товар 3 (Добавлен) -->
+                        <div class="mock-product" id="prod-3">
+                            <div class="mock-img" style="background: #c0c0c0;"></div>
+                            <div class="mock-info">
+                                <div class="m-title" id="t-3" data-val="Квантовый Процессор Z9"></div>
+                                <div class="m-desc"></div>
+                                <div class="m-price" id="p-3" data-val="320 000 ₽"></div>
+                            </div>
+                        </div>
+
+                        <!-- Товар 4 (Добавлен) -->
+                        <div class="mock-product" id="prod-4">
+                            <div class="mock-img" style="background: #b0b0b0;"></div>
+                            <div class="mock-info">
+                                <div class="m-title" id="t-4" data-val="Нейро-интерфейс v2"></div>
+                                <div class="m-desc"></div>
+                                <div class="m-price" id="p-4" data-val="55 400 ₽"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Правая панель: База Данных -->
+                <div class="panel panel-db">
+                    <div class="panel-title db"><span>🗄️</span> Ваша База (Структура)</div>
+                    <div class="status-badge" id="db-status">RECIEVING DATA...</div>
+                    
+                    <div class="db-container" id="db-json">
+                        <!-- JSON -->
+                        <div style="color: rgba(255,255,255,0.2); text-align: center; margin-top: 40%;" id="db-placeholder">Ожидание инициализации парсера...</div>
+                    </div>
+
+                    <!-- Кнопка экспорта (Появляется в конце) -->
+                    <div class="export-btn-container" id="export-container">
+                        <button class="btn-export" onclick="exportJSON()">📥 Скачать .JSON</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Преимущества -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="f-icon">🕵️‍♂️</div>
+                <div class="f-title">Мониторинг Конкурентов</div>
+                <div class="f-desc">Автоматическое отслеживание цен, скидок и новинок на сайтах конкурентов 24/7. Вы всегда на шаг впереди.</div>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🛡️</div>
+                <div class="f-title">Обход Защит (Anti-Bot)</div>
+                <div class="f-desc">Используем прокси-сети, имитацию человеческого поведения и headless-браузеры для обхода Cloudflare и капч.</div>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🔄</div>
+                <div class="f-title">API Интеграция</div>
+                <div class="f-desc">Собранные данные не просто лежат в файле. Они автоматически выгружаются в вашу CRM, Telegram-бота или на сайт.</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- 1. КАНВАС ФОН (РАДАР / СЕТЬ ДАННЫХ) ---
+        const canvas = document.getElementById('radar-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let nodes = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const nodeCount = window.innerWidth < 768 ? 30 : 70;
+        for(let i=0; i<nodeCount; i++) {
+            nodes.push({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, radius: Math.random() * 1.5 + 0.5, glow: Math.random() > 0.8 });
+        }
+
+        let scanAngle = 0;
+        function drawNetwork() {
+            ctx.clearRect(0, 0, width, height);
+            const cx = width / 2, cy = height / 2, radius = Math.max(width, height);
+            scanAngle += 0.01;
+            ctx.save(); ctx.translate(cx, cy); ctx.rotate(scanAngle);
+            ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, radius, 0, 0.2); ctx.lineTo(0, 0);
+            ctx.fillStyle = "rgba(0, 255, 163, 0.02)"; ctx.fill();
+            ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(radius, 0); ctx.strokeStyle = "rgba(0, 255, 163, 0.1)"; ctx.stroke();
+            ctx.restore();
+
+            nodes.forEach((node, i) => {
+                node.x += node.vx; node.y += node.vy;
+                if(node.x < 0 || node.x > width) node.vx *= -1;
+                if(node.y < 0 || node.y > height) node.vy *= -1;
+
+                ctx.beginPath(); ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = node.glow ? '#00ffa3' : 'rgba(255,255,255,0.2)';
+                if(node.glow) { ctx.shadowBlur = 10; ctx.shadowColor = '#00ffa3'; } else { ctx.shadowBlur = 0; }
+                ctx.fill();
+
+                for(let j = i + 1; j < nodes.length; j++) {
+                    let d = Math.hypot(node.x - nodes[j].x, node.y - nodes[j].y);
+                    if(d < 120) { ctx.beginPath(); ctx.moveTo(node.x, node.y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.strokeStyle = `rgba(0, 255, 163, ${0.15 * (1 - d/120)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+                }
+            });
+            requestAnimationFrame(drawNetwork);
+        }
+        drawNetwork();
+
+        // --- 2. ИНТЕРАКТИВ ПАРСЕРА ---
+        const btnStart = document.getElementById('btn-start');
+        const scanner = document.getElementById('scanner');
+        const dbJson = document.getElementById('db-json');
+        const dbStatus = document.getElementById('db-status');
+        const mockSiteScroll = document.getElementById('mock-site-scroll');
+        const exportContainer = document.getElementById('export-container');
+        let isScraping = false;
+        
+        let rawJsonData = []; // Для экспорта
+
+        const targets = [
+            { url: "https://target-competitor.shop/catalog", items: ["Сверхмощный Сервер X1", "145 000 ₽", "Кибер-Монитор 4K", "89 900 ₽", "Квантовый Процессор Z9", "320 000 ₽", "Нейро-интерфейс v2", "55 400 ₽"] },
+            { url: "https://crypto-exchange.io/api/markets", items: ["Bitcoin (BTC)", "$ 98,540", "Ethereum (ETH)", "$ 4,120", "Solana (SOL)", "$ 3,100", "SyndicateCoin (SND)", "$ 0.54"] }
+        ];
+        let currentTargetIdx = 0;
+
+        // Мелкий виброотклик для настроек
+        function vibrateLight() { if(navigator.vibrate) navigator.vibrate(10); }
+
+        // Смена цели по клику на URL
+        window.cycleTargetUrl = function() {
+            if(isScraping) return;
+            currentTargetIdx = (currentTargetIdx + 1) % targets.length;
+            const target = targets[currentTargetIdx];
+            document.getElementById('target-url').value = target.url;
+            
+            // Обновляем визуальные данные в мокапе
+            document.getElementById('t-1').dataset.val = target.items[0]; document.getElementById('p-1').dataset.val = target.items[1];
+            document.getElementById('t-2').dataset.val = target.items[2]; document.getElementById('p-2').dataset.val = target.items[3];
+            document.getElementById('t-3').dataset.val = target.items[4]; document.getElementById('p-3').dataset.val = target.items[5];
+            document.getElementById('t-4').dataset.val = target.items[6]; document.getElementById('p-4').dataset.val = target.items[7];
+            
+            vibrateLight();
+            
+            // Сброс визуального состояния продуктов
+            for(let i=1; i<=4; i++) document.getElementById(`prod-${i}`).classList.remove('parsed');
+        }
+
+        function startScraping() {
+            if(isScraping) return;
+            isScraping = true;
+            rawJsonData = [];
+            
+            if (navigator.vibrate) navigator.vibrate(30);
+
+            // Сброс UI
+            exportContainer.style.display = 'none';
+            btnStart.classList.add('active');
+            btnStart.innerHTML = '<span>⚙️</span> ИЗВЛЕЧЕНИЕ...';
+            scanner.classList.add('active');
+            dbStatus.classList.add('active');
+            mockSiteScroll.scrollTo({ top: 0, behavior: 'smooth' }); // Сброс скролла
+            for(let i=1; i<=4; i++) document.getElementById(`prod-${i}`).classList.remove('parsed');
+            
+            dbJson.innerHTML = '<div class="db-line"><span class="json-bracket">[</span></div>';
+
+            let delay = 600;
+            const target = targets[currentTargetIdx];
+            
+            // Парсим 4 товара
+            for(let i=1; i<=4; i++) {
+                const title = target.items[(i-1)*2];
+                const price = target.items[(i-1)*2 + 1];
+                
+                setTimeout(() => {
+                    extractDataVisual(`prod-${i}`, title, price, i === 4);
+                    // Автоскролл сайта-донора
+                    const el = document.getElementById(`prod-${i}`);
+                    if(el && i > 1) {
+                        mockSiteScroll.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' });
+                    }
+                }, delay);
+                delay += 1400; // Пауза
+            }
+
+            // Завершение
+            setTimeout(() => {
+                dbJson.innerHTML += '<div class="db-line"><span class="json-bracket">]</span></div>';
+                btnStart.classList.remove('active');
+                btnStart.innerHTML = '<span>✓</span> ПАРСИНГ ЗАВЕРШЕН';
+                scanner.classList.remove('active');
+                dbStatus.classList.remove('active');
+                dbStatus.innerText = 'DATA SAVED';
+                dbStatus.style.background = 'rgba(0,255,163,0.1)';
+                dbStatus.style.color = '#00ffa3';
+                dbStatus.style.borderColor = '#00ffa3';
+                
+                // Показываем кнопку экспорта
+                exportContainer.style.display = 'block';
+
+                if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+
+                setTimeout(() => {
+                    btnStart.innerHTML = '<span>⚙️</span> ЗАПУСТИТЬ СНОВА';
+                    isScraping = false;
+                }, 3000);
+            }, delay + 500);
+        }
+
+        function extractDataVisual(elementId, title, price, isLast) {
+            const el = document.getElementById(elementId);
+            if(!el) return;
+
+            if (navigator.vibrate) navigator.vibrate(15);
+            el.classList.add('parsed'); // Подсветка распарсенного блока
+
+            const flyingTitle = document.createElement('div');
+            flyingTitle.className = 'flying-data'; flyingTitle.innerText = `"${title}"`;
+            
+            const flyingPrice = document.createElement('div');
+            flyingPrice.className = 'flying-data'; flyingPrice.style.color = 'var(--cyber-amber)';
+            flyingPrice.style.borderColor = 'var(--cyber-amber)'; flyingPrice.innerText = price;
+
+            const rect = el.getBoundingClientRect();
+            const donorPanel = document.getElementById('donor-panel').getBoundingClientRect();
+            
+            flyingTitle.style.top = (rect.top - donorPanel.top + 20) + 'px'; flyingTitle.style.left = '80px';
+            flyingPrice.style.top = (rect.top - donorPanel.top + 50) + 'px'; flyingPrice.style.left = '80px';
+
+            document.getElementById('donor-panel').appendChild(flyingTitle);
+            document.getElementById('donor-panel').appendChild(flyingPrice);
+
+            flyingTitle.style.animation = 'flyToDB 1s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+            flyingPrice.style.animation = 'flyToDB 1s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards';
+
+            setTimeout(() => {
+                if(flyingTitle.parentNode) flyingTitle.parentNode.removeChild(flyingTitle);
+                if(flyingPrice.parentNode) flyingPrice.parentNode.removeChild(flyingPrice);
+                
+                appendToJson(title, price, isLast);
+                rawJsonData.push({ item: title, price: price }); // Сохраняем для экспорта
+                
+                dbJson.style.background = 'rgba(0, 255, 163, 0.05)';
+                setTimeout(() => dbJson.style.background = 'transparent', 200);
+
+            }, 1200);
+        }
+
+        function appendToJson(title, price, isLast) {
+            const comma = isLast ? '' : ',';
+            const html = `
+                <div class="db-line" style="padding-left: 20px;"><span class="json-bracket">{</span></div>
+                <div class="db-line" style="padding-left: 40px;"><span class="json-key">"item"</span>: <span class="json-string">"${title}"</span>,</div>
+                <div class="db-line" style="padding-left: 40px;"><span class="json-key">"price"</span>: <span class="json-string">"${price}"</span></div>
+                <div class="db-line" style="padding-left: 20px;"><span class="json-bracket">}</span><span class="json-bracket">${comma}</span></div>
+            `;
+            dbJson.innerHTML += html;
+            dbJson.scrollTop = dbJson.scrollHeight;
+        }
+
+        // Фиктивный Экспорт JSON файла
+        window.exportJSON = function() {
+            if(rawJsonData.length === 0) return;
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(rawJsonData, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "metla_parsed_data.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+            
+            if (navigator.vibrate) navigator.vibrate([20, 50, 20]);
+            
+            const btn = document.querySelector('.btn-export');
+            btn.innerHTML = "✓ Файл загружен";
+            setTimeout(() => btn.innerHTML = "📥 Скачать .JSON", 3000);
+        }
+    </script>
+</body>
+</html>
